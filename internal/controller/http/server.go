@@ -18,12 +18,18 @@ type Server struct {
 func NewServer(config *config.Server, logger *zap.Logger) (*Server, error) {
 	r := echo.New()
 	r.HideBanner = true
+	logger = logger.With(
+		zap.String("layer", "http"),
+		zap.String("running_at", config.Addr()),
+	)
+	logger.Debug("initializing new server")
 
 	s := &Server{
 		router: r,
 		config: config,
 		log:    logger,
 	}
+	logger.Info("server initialized successfully")
 
 	return s, nil
 }
