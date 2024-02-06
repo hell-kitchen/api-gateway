@@ -2,8 +2,8 @@ package model
 
 type (
 	UsersGetAllRequest struct {
-		Page  int `query:"page"`
-		Limit int `query:"limit"`
+		Page  int `json:"-" query:"page"`
+		Limit int `json:"-" query:"limit"`
 	}
 	UsersCreateRequest struct {
 		Email     string `json:"email"`
@@ -13,41 +13,41 @@ type (
 		Password  string `json:"password"`
 	}
 	UsersGetByIDRequest struct {
-		ID string `path:"id"`
+		ID string `json:"-" path:"id"`
 	}
 	UsersSetPasswordRequest struct {
 		NewPassword     string `json:"new_password"`
 		CurrentPassword string `json:"current_password"`
 	}
 	UsersGetSubscriptionsRequest struct {
-		Page         int `query:"page"`
-		Limit        int `query:"limit"`
-		RecipesLimit int `query:"recipes_limit"`
+		Page         int `json:"-" query:"page"`
+		Limit        int `json:"-" query:"limit"`
+		RecipesLimit int `json:"-" query:"recipes_limit"`
 	}
 	UsersSubscribeRequest struct {
-		ID           string `path:"id"`
-		RecipesLimit int    `query:"recipes_limit"`
+		ID           string `json:"-" path:"id"`
+		RecipesLimit int    `json:"-" query:"recipes_limit"`
 	}
 	UsersUnsubscribeRequest struct {
-		ID string `path:"id"`
+		ID string `path:"id" json:"-"`
 	}
 	TokensLoginRequest struct {
 		Password string `json:"password"`
 		Email    string `json:"email"`
 	}
 	TagsGetByIDRequest struct {
-		ID string `path:"id"`
+		ID string `path:"id" json:"-"`
 	}
 	// RecipesGetAllRequest godoc.
 	//
 	// TODO: check how to check was value in request or not
 	RecipesGetAllRequest struct {
-		Page             int      `query:"page"`
-		Limit            int      `query:"limit"`
-		IsFavorited      int      `query:"is_favorited"`
-		IsInShoppingCart int      `query:"is_in_shopping_cart"`
-		Author           string   `query:"author"`
-		Tags             []string `query:"tags"`
+		Page             int      `query:"page" json:"-"`
+		Limit            int      `query:"limit" json:"-"`
+		IsFavorited      int      `query:"is_favorited" json:"-"`
+		IsInShoppingCart int      `query:"is_in_shopping_cart" json:"-"`
+		Author           string   `query:"author" json:"-"`
+		Tags             []string `query:"tags" json:"-"`
 	}
 	RecipesCreateRequest struct {
 		Ingredients []IngredientInRecipeDTO `json:"ingredients"`
@@ -58,7 +58,7 @@ type (
 		CookingTime int                     `json:"cooking_time"`
 	}
 	RecipesGetByIDRequest struct {
-		ID string `path:"id"`
+		ID string `path:"id" json:"-"`
 	}
 	RecipesUpdateByIDRequest struct {
 		ID          int                     `json:"-" path:"id"`
@@ -70,19 +70,19 @@ type (
 		CookingTime int                     `json:"cooking_time"`
 	}
 	RecipesDeleteByIDRequest struct {
-		ID string `path:"id"`
+		ID string `path:"id" json:"-"`
 	}
 	RecipesAddRecipeToShoppingCartRequest struct {
-		ID string `path:"id"`
+		ID string `path:"id" json:"-"`
 	}
 	RecipesRemoveRecipeFromShoppingCartRequest struct {
-		ID string `path:"id"`
+		ID string `path:"id" json:"-"`
 	}
 	RecipesAddRecipeToFavoriteRequest struct {
-		ID string `path:"id"`
+		ID string `path:"id" json:"-"`
 	}
 	RecipesRemoveRecipeFromFavoriteRequest struct {
-		ID string `path:"id"`
+		ID string `path:"id" json:"-"`
 	}
 	IngredientsGetAllRequest struct {
 		Name string `json:"-" query:"name"`
