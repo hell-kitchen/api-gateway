@@ -10,3 +10,4 @@
 
 go.work
 .idea
+*.o
