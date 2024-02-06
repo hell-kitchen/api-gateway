@@ -24,3 +24,7 @@ func NewServer() (*Server, error) {
 	}
 	return s, nil
 }
+
+func (cfg Server) Addr() string {
+	return fmt.Sprintf("%s:%d", cfg.BindAddr, cfg.BindPort)
+}
