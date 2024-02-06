@@ -66,7 +66,6 @@ func (srv *Server) configureMiddlewares() {
 	srv.router.Use(
 		mw.LogMiddleware(srv.log),
 		middleware.CORSWithConfig(middleware.DefaultCORSConfig),
-		middleware.CSRFWithConfig(middleware.DefaultCSRFConfig),
 		middleware.RequestIDWithConfig(middleware.RequestIDConfig{
 			Skipper:      middleware.DefaultSkipper,
 			Generator:    uuid.NewString,
@@ -84,11 +83,11 @@ func (srv *Server) configureRoutes() {
 		usersRouter.GET("/", srv.UsersGetAll)
 		usersRouter.POST("/", srv.UsersCreate)
 		usersRouter.GET("/me", srv.UsersGetMe)
-		usersRouter.GET("/:id", srv.UsersGetByID)
 		usersRouter.POST("/set_password", srv.UsersSetPassword)
 
 		// Subscriptions subgroup
 		usersRouter.GET("/subscriptions", srv.UsersGetSubscriptions)
+		usersRouter.GET("/:id", srv.UsersGetByID)
 		usersRouter.POST("/:id/subscribe", srv.UsersSubscribe)
 		usersRouter.POST("/:id/subscribe", srv.UsersUnsubscribe)
 	}
