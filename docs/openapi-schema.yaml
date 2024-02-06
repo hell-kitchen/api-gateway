@@ -1,7 +1,12 @@
 openapi: 3.0.2
 info:
-  title: 'Foodgram'
+  title: 'Hell Kitchen'
   version: ''
+
+servers:
+  - url: http://localhost:8080
+    description: Local server
+
 paths:
   /api/users/:
     get:
@@ -912,6 +917,7 @@ components:
           type: string
           format: email
           maxLength: 254
+          pattern: ^[\w.@+-]+\z
           description: "Адрес электронной почты"
           example: "vpupkin@yandex.ru"
         id:
@@ -920,7 +926,6 @@ components:
         username:
           type: string
           description: "Уникальный юзернейм"
-          pattern: ^[\w.@+-]+\z
           maxLength: 150
           example: "vasya.pupkin"
         first_name:
