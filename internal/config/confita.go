@@ -33,3 +33,17 @@ func getConfitaLoader() (l *confita.Loader) {
 
 	return l
 }
+
+// setNewLoader sets loader l as global.
+//
+// Return function on calling it will set old global loader back.
+func setNewLoader(l *confita.Loader) func() {
+	_confitaMu.Lock()
+	old := _loader
+	_loader = l
+	_confitaMu.Unlock()
+	return func() {
+		setNewLoader(old)
+	}
+
+}
