@@ -100,7 +100,7 @@ func (srv *Server) configureRoutes() {
 	tagsRouter := apiRouter.Group("/tags")
 	{
 		tagsRouter.GET("/", srv.TagsGetAll)
-		tagsRouter.GET("/:id", srv.TagsGetOne)
+		tagsRouter.GET("/:id", srv.TagsGetByID)
 	}
 	recipesRouter := apiRouter.Group("/recipes")
 	{
@@ -112,10 +112,10 @@ func (srv *Server) configureRoutes() {
 
 		recipesRouter.GET("/download_shopping_cart", srv.RecipesDownloadShoppingCart)
 		recipesRouter.POST("/:id/shopping_cart", srv.RecipesAddRecipeToShoppingCart)
-		recipesRouter.DELETE("/:id/shopping_cart", srv.RecipesDeleteRecipeFromShoppingCart)
+		recipesRouter.DELETE("/:id/shopping_cart", srv.RecipesRemoveRecipeFromShoppingCart)
 
 		recipesRouter.POST("/:id/favorite", srv.RecipesAddRecipeToFavorite)
-		recipesRouter.DELETE("/:id/favorite", srv.RecipesDeleteRecipeFromFavorite)
+		recipesRouter.DELETE("/:id/favorite", srv.RecipesRemoveRecipeFromFavorite)
 	}
 
 	ingredientsRouter := apiRouter.Group("/ingredients")
