@@ -1,3 +1,4 @@
+//go:generate easyjson -all requests.go
 package model
 
 type (

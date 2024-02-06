@@ -1,3 +1,4 @@
+//go:generate easyjson -all ingredients.go
 package model
 
 type IngredientInRecipeDTO struct {
