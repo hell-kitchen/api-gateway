@@ -1,6 +1,9 @@
 package main
 
-import "go.uber.org/fx"
+import (
+	"github.com/hell-kitchen/api-gateway/internal/config"
+	"go.uber.org/fx"
+)
 
 func main() {
 	fx.New(
@@ -9,5 +12,9 @@ func main() {
 }
 
 func NewOptions() fx.Option {
-	return fx.Options()
+	return fx.Options(
+		fx.Provide(
+			config.NewServer,
+		),
+	)
 }
