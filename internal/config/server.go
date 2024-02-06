@@ -5,6 +5,7 @@ import (
 	"fmt"
 )
 
+// Server is config to set on which port server will be running.
 type Server struct {
 	BindAddr string `config:"bind-addr"`
 	BindPort int    `config:"bind-port"`
