@@ -3,6 +3,7 @@ module github.com/hell-kitchen/api-gateway
 go 1.20
 
 require (
+	github.com/heetch/confita v0.10.0 // indirect
 	go.uber.org/atomic v1.7.0 // indirect
 	go.uber.org/dig v1.17.0 // indirect
 	go.uber.org/fx v1.20.1 // indirect
