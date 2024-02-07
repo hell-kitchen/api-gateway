@@ -632,7 +632,7 @@ paths:
           required: true
           description: ''
           schema:
-            type: integer
+            type: string
       responses:
         '200':
           content:
@@ -706,14 +706,14 @@ components:
       description:  'Пользователь (В рецепте - автор рецепта)'
       type: object
       properties:
+        id:
+          type: string
+          readOnly: true
         email:
           type: string
           format: email
           maxLength: 254
           description: "Адрес электронной почты"
-        id:
-          type: integer
-          readOnly: true
         username:
           type: string
           description: "Уникальный юзернейм"
@@ -740,18 +740,18 @@ components:
       description: 'Расширенный объект пользователя с рецептами'
       type: object
       properties:
+        id:
+          type: string
+          readOnly: true
         email:
           type: string
           format: email
           maxLength: 254
+          pattern: ^[\w.@+-]+\z
           description: "Адрес электронной почты"
-        id:
-          type: integer
-          readOnly: true
         username:
           type: string
           description: "Уникальный юзернейм"
-          pattern: ^[\w.@+-]+\z
           maxLength: 150
         first_name:
           type: string
@@ -779,7 +779,7 @@ components:
       type: object
       properties:
         id:
-          type: integer
+          type: string
           readOnly: true
         name:
           type: string
@@ -803,7 +803,7 @@ components:
       type: object
       properties:
         id:
-          type: integer
+          type: string
           readOnly: true
           description: 'Уникальный id'
         tags:
@@ -853,7 +853,7 @@ components:
       type: object
       properties:
         id:
-          type: integer
+          type: string
           readOnly: true
           description: 'Уникальный id'
         name:
@@ -873,7 +873,7 @@ components:
       type: object
       properties:
         id:
-          type: integer
+          type: string
           readOnly: true
         name:
           type: string
@@ -890,7 +890,7 @@ components:
       type: object
       properties:
         id:
-          type: integer
+          type: string
           readOnly: true
         name:
           type: string
@@ -913,6 +913,9 @@ components:
     CustomUserCreate:
       type: object
       properties:
+        id:
+          type: string
+          readOnly: true
         email:
           type: string
           format: email
@@ -920,9 +923,6 @@ components:
           pattern: ^[\w.@+-]+\z
           description: "Адрес электронной почты"
           example: "vpupkin@yandex.ru"
-        id:
-          type: integer
-          readOnly: true
         username:
           type: string
           description: "Уникальный юзернейм"
@@ -952,15 +952,15 @@ components:
     CustomUserResponseOnCreate:
       type: object
       properties:
+        id:
+          type: string
+          readOnly: true
         email:
           type: string
           format: email
           maxLength: 254
           description: "Адрес электронной почты"
           example: "vpupkin@yandex.ru"
-        id:
-          type: integer
-          readOnly: true
         username:
           type: string
           description: "Уникальный юзернейм"
@@ -1057,20 +1057,20 @@ components:
       type: object
       properties:
         id:
-          type: integer
+          type: string
           readOnly: true
         ingredients:
           description: Список ингредиентов
           type: array
           items:
             example:
-              id: 1123
+              id: "1123"
               amount: 10
             type: object
             properties:
               id:
                 description: 'Уникальный id'
-                type: integer
+                type: string
               amount:
                 description: 'Количество в рецепте'
                 type: integer
@@ -1080,9 +1080,9 @@ components:
         tags:
           description: 'Список id тегов'
           type: array
-          example: [1, 2]
+          example: ["1", "2"]
           items:
-            type: integer
+            type: string
         image:
           description: 'Картинка, закодированная в Base64'
           example: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABAgMAAABieywaAAAACVBMVEUAAAD///9fX1/S0ecCAAAACXBIWXMAAA7EAAAOxAGVKw4bAAAACklEQVQImWNoAAAAggCByxOyYQAAAABJRU5ErkJggg=='
