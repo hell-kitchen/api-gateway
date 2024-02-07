@@ -51,24 +51,24 @@ type (
 		Tags             []string `query:"tags" json:"-"`
 	}
 	RecipesCreateRequest struct {
-		Ingredients []IngredientInRecipeDTO `json:"ingredients"`
-		Tags        []int                   `json:"tags"`
-		Image       string                  `json:"image"`
-		Name        string                  `json:"name"`
-		Text        string                  `json:"text"`
-		CookingTime int                     `json:"cooking_time"`
+		Ingredients []IngredientInRecipeCreationDTO `json:"ingredients"`
+		Tags        []int                           `json:"tags"`
+		Image       string                          `json:"image"`
+		Name        string                          `json:"name"`
+		Text        string                          `json:"text"`
+		CookingTime int                             `json:"cooking_time"`
 	}
 	RecipesGetByIDRequest struct {
 		ID string `path:"id" json:"-"`
 	}
 	RecipesUpdateByIDRequest struct {
-		ID          int                     `json:"-" path:"id"`
-		Ingredients []IngredientInRecipeDTO `json:"ingredients"`
-		Tags        []int                   `json:"tags"`
-		Image       string                  `json:"image"`
-		Name        string                  `json:"name"`
-		Text        string                  `json:"text"`
-		CookingTime int                     `json:"cooking_time"`
+		ID          int                             `json:"-" path:"id"`
+		Ingredients []IngredientInRecipeCreationDTO `json:"ingredients"`
+		Tags        []int                           `json:"tags"`
+		Image       string                          `json:"image"`
+		Name        string                          `json:"name"`
+		Text        string                          `json:"text"`
+		CookingTime int                             `json:"cooking_time"`
 	}
 	RecipesDeleteByIDRequest struct {
 		ID string `path:"id" json:"-"`

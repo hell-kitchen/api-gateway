@@ -17,7 +17,7 @@ var (
 	_ easyjson.Marshaler
 )
 
-func easyjsonC156496aDecodeGithubComHellKitchenApiGatewayInternalModel(in *jlexer.Lexer, out *IngredientInRecipeDTO) {
+func easyjsonC156496aDecodeGithubComHellKitchenApiGatewayInternalModel(in *jlexer.Lexer, out *IngredientInRecipeCreationDTO) {
 	isTopLevel := in.IsStart()
 	if in.IsNull() {
 		if isTopLevel {
@@ -50,7 +50,7 @@ func easyjsonC156496aDecodeGithubComHellKitchenApiGatewayInternalModel(in *jlexe
 		in.Consumed()
 	}
 }
-func easyjsonC156496aEncodeGithubComHellKitchenApiGatewayInternalModel(out *jwriter.Writer, in IngredientInRecipeDTO) {
+func easyjsonC156496aEncodeGithubComHellKitchenApiGatewayInternalModel(out *jwriter.Writer, in IngredientInRecipeCreationDTO) {
 	out.RawByte('{')
 	first := true
 	_ = first
@@ -68,25 +68,25 @@ func easyjsonC156496aEncodeGithubComHellKitchenApiGatewayInternalModel(out *jwri
 }
 
 // MarshalJSON supports json.Marshaler interface
-func (v IngredientInRecipeDTO) MarshalJSON() ([]byte, error) {
+func (v IngredientInRecipeCreationDTO) MarshalJSON() ([]byte, error) {
 	w := jwriter.Writer{}
 	easyjsonC156496aEncodeGithubComHellKitchenApiGatewayInternalModel(&w, v)
 	return w.Buffer.BuildBytes(), w.Error
 }
 
 // MarshalEasyJSON supports easyjson.Marshaler interface
-func (v IngredientInRecipeDTO) MarshalEasyJSON(w *jwriter.Writer) {
+func (v IngredientInRecipeCreationDTO) MarshalEasyJSON(w *jwriter.Writer) {
 	easyjsonC156496aEncodeGithubComHellKitchenApiGatewayInternalModel(w, v)
 }
 
 // UnmarshalJSON supports json.Unmarshaler interface
-func (v *IngredientInRecipeDTO) UnmarshalJSON(data []byte) error {
+func (v *IngredientInRecipeCreationDTO) UnmarshalJSON(data []byte) error {
 	r := jlexer.Lexer{Data: data}
 	easyjsonC156496aDecodeGithubComHellKitchenApiGatewayInternalModel(&r, v)
 	return r.Error()
 }
 
 // UnmarshalEasyJSON supports easyjson.Unmarshaler interface
-func (v *IngredientInRecipeDTO) UnmarshalEasyJSON(l *jlexer.Lexer) {
+func (v *IngredientInRecipeCreationDTO) UnmarshalEasyJSON(l *jlexer.Lexer) {
 	easyjsonC156496aDecodeGithubComHellKitchenApiGatewayInternalModel(l, v)
 }

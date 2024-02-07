@@ -638,15 +638,15 @@ func easyjson11d1a9baDecodeGithubComHellKitchenApiGatewayInternalModel9(in *jlex
 				in.Delim('[')
 				if out.Ingredients == nil {
 					if !in.IsDelim(']') {
-						out.Ingredients = make([]IngredientInRecipeDTO, 0, 2)
+						out.Ingredients = make([]IngredientInRecipeCreationDTO, 0, 2)
 					} else {
-						out.Ingredients = []IngredientInRecipeDTO{}
+						out.Ingredients = []IngredientInRecipeCreationDTO{}
 					}
 				} else {
 					out.Ingredients = (out.Ingredients)[:0]
 				}
 				for !in.IsDelim(']') {
-					var v1 IngredientInRecipeDTO
+					var v1 IngredientInRecipeCreationDTO
 					(v1).UnmarshalEasyJSON(in)
 					out.Ingredients = append(out.Ingredients, v1)
 					in.WantComma()
@@ -1103,15 +1103,15 @@ func easyjson11d1a9baDecodeGithubComHellKitchenApiGatewayInternalModel15(in *jle
 				in.Delim('[')
 				if out.Ingredients == nil {
 					if !in.IsDelim(']') {
-						out.Ingredients = make([]IngredientInRecipeDTO, 0, 2)
+						out.Ingredients = make([]IngredientInRecipeCreationDTO, 0, 2)
 					} else {
-						out.Ingredients = []IngredientInRecipeDTO{}
+						out.Ingredients = []IngredientInRecipeCreationDTO{}
 					}
 				} else {
 					out.Ingredients = (out.Ingredients)[:0]
 				}
 				for !in.IsDelim(']') {
-					var v7 IngredientInRecipeDTO
+					var v7 IngredientInRecipeCreationDTO
 					(v7).UnmarshalEasyJSON(in)
 					out.Ingredients = append(out.Ingredients, v7)
 					in.WantComma()
