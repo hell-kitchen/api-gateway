@@ -52,7 +52,7 @@ type (
 	}
 	RecipesCreateRequest struct {
 		Ingredients []IngredientInRecipeCreationDTO `json:"ingredients"`
-		Tags        []int                           `json:"tags"`
+		Tags        []string                        `json:"tags"`
 		Image       string                          `json:"image"`
 		Name        string                          `json:"name"`
 		Text        string                          `json:"text"`
@@ -62,7 +62,7 @@ type (
 		ID string `path:"id" json:"-"`
 	}
 	RecipesUpdateByIDRequest struct {
-		ID          int                             `json:"-" path:"id"`
+		ID          string                          `json:"-" path:"id"`
 		Ingredients []IngredientInRecipeCreationDTO `json:"ingredients"`
 		Tags        []int                           `json:"tags"`
 		Image       string                          `json:"image"`
@@ -89,6 +89,6 @@ type (
 		Name string `json:"-" query:"name"`
 	}
 	IngredientsGetByIDRequest struct {
-		ID int `json:"-" path:"id"`
+		ID string `json:"-" path:"id"`
 	}
 )

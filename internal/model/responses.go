@@ -68,7 +68,7 @@ type (
 	}
 	UserSubscribedResponse     UserInSubscriptionsResult
 	IngredientsGetByIDResponse struct {
-		Id              int    `json:"id"`
+		ID              string `json:"id"`
 		Name            string `json:"name"`
 		MeasurementUnit string `json:"measurement_unit"`
 	}

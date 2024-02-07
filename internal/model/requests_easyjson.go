@@ -1126,16 +1126,16 @@ func easyjson11d1a9baDecodeGithubComHellKitchenApiGatewayInternalModel15(in *jle
 				in.Delim('[')
 				if out.Tags == nil {
 					if !in.IsDelim(']') {
-						out.Tags = make([]int, 0, 8)
+						out.Tags = make([]string, 0, 4)
 					} else {
-						out.Tags = []int{}
+						out.Tags = []string{}
 					}
 				} else {
 					out.Tags = (out.Tags)[:0]
 				}
 				for !in.IsDelim(']') {
-					var v8 int
-					v8 = int(in.Int())
+					var v8 string
+					v8 = string(in.String())
 					out.Tags = append(out.Tags, v8)
 					in.WantComma()
 				}
@@ -1190,7 +1190,7 @@ func easyjson11d1a9baEncodeGithubComHellKitchenApiGatewayInternalModel15(out *jw
 				if v11 > 0 {
 					out.RawByte(',')
 				}
-				out.Int(int(v12))
+				out.String(string(v12))
 			}
 			out.RawByte(']')
 		}
