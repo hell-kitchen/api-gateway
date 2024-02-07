@@ -8,6 +8,14 @@ type (
 		PreviousPage string                `json:"previous"`
 		Results      []UserInSubscriptions `json:"results"`
 	}
+	UsersGetByIDResponse struct {
+		Email        string `json:"email"`
+		ID           string `json:"id"`
+		Username     string `json:"username"`
+		FirstName    string `json:"first_name"`
+		LastName     string `json:"last_name"`
+		IsSubscribed bool   `json:"is_subscribed"`
+	}
 	UsersCreateResponse struct {
 		ID        string `json:"id"`
 		Email     string `json:"email"`
@@ -41,6 +49,12 @@ type (
 	RecipesGetOneResponse              RecipeDTO
 	RecipesUpdateOneResponse           RecipeDTO
 	RecipesAddedToShoppingCartResponse struct {
+		ID          string `json:"id"`
+		Name        string `json:"name"`
+		Image       string `json:"image"`
+		CookingTime int    `json:"cooking_time"`
+	}
+	RecipesAddedToFavoriteResponse struct {
 		ID          string `json:"id"`
 		Name        string `json:"name"`
 		Image       string `json:"image"`
