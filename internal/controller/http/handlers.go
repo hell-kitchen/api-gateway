@@ -11,7 +11,12 @@ func (srv *Server) IngredientsGetAll(ctx echo.Context) error {
 	if err := ctx.Bind(&req); err != nil {
 		return err
 	}
-	return ctx.JSON(http.StatusOK, req)
+
+	resp, err := srv.srv.Ingredients().GetAll(ctx.Request().Context(), req)
+	if err != nil {
+		return err
+	}
+	return ctx.JSON(http.StatusOK, resp)
 }
 
 func (srv *Server) IngredientsGetByID(ctx echo.Context) error {
@@ -19,7 +24,12 @@ func (srv *Server) IngredientsGetByID(ctx echo.Context) error {
 	if err := ctx.Bind(&req); err != nil {
 		return err
 	}
-	return ctx.JSON(http.StatusOK, req)
+
+	resp, err := srv.srv.Ingredients().GetByID(ctx.Request().Context(), req)
+	if err != nil {
+		return err
+	}
+	return ctx.JSON(http.StatusOK, resp)
 }
 
 func (srv *Server) RecipesGetAll(ctx echo.Context) error {
@@ -27,7 +37,13 @@ func (srv *Server) RecipesGetAll(ctx echo.Context) error {
 	if err := ctx.Bind(&req); err != nil {
 		return err
 	}
-	return ctx.JSON(http.StatusOK, req)
+
+	resp, err := srv.srv.Recipes().GetAll(ctx.Request().Context(), req)
+	if err != nil {
+		return err
+	}
+
+	return ctx.JSON(http.StatusOK, resp)
 }
 
 func (srv *Server) RecipesCreate(ctx echo.Context) error {
@@ -35,7 +51,13 @@ func (srv *Server) RecipesCreate(ctx echo.Context) error {
 	if err := ctx.Bind(&req); err != nil {
 		return err
 	}
-	return ctx.JSON(http.StatusOK, req)
+
+	resp, err := srv.srv.Recipes().Create(ctx.Request().Context(), req)
+	if err != nil {
+		return err
+	}
+
+	return ctx.JSON(http.StatusCreated, resp)
 }
 
 func (srv *Server) RecipesGetByID(ctx echo.Context) error {

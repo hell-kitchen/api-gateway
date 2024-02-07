@@ -3,6 +3,7 @@ package main
 import (
 	"github.com/hell-kitchen/api-gateway/internal/config"
 	"github.com/hell-kitchen/api-gateway/internal/controller/http"
+	"github.com/hell-kitchen/api-gateway/internal/service/fake"
 	"go.uber.org/fx"
 	"go.uber.org/zap"
 )
@@ -19,6 +20,7 @@ func NewOptions() fx.Option {
 			config.NewServer,
 			http.NewServer,
 			zap.NewProduction,
+			fake.New,
 		),
 		fx.Invoke(
 			addServerStartup,

@@ -5,6 +5,7 @@ import (
 	"github.com/google/uuid"
 	"github.com/hell-kitchen/api-gateway/internal/config"
 	"github.com/hell-kitchen/api-gateway/internal/controller/http/mw"
+	"github.com/hell-kitchen/api-gateway/internal/service"
 	"github.com/labstack/echo/v4"
 	"github.com/labstack/echo/v4/middleware"
 	"go.uber.org/zap"
@@ -15,10 +16,11 @@ type Server struct {
 	router *echo.Echo
 	config *config.Server
 	log    *zap.Logger
+	srv    service.Interface
 }
 
 // NewServer return new HTTP Server.
-func NewServer(config *config.Server, logger *zap.Logger) (*Server, error) {
+func NewServer(config *config.Server, logger *zap.Logger, srv service.Interface) (*Server, error) {
 	logger = logger.With(
 		zap.String("layer", "http"),
 		zap.String("running_at", config.Addr()),
@@ -29,6 +31,7 @@ func NewServer(config *config.Server, logger *zap.Logger) (*Server, error) {
 		router: echo.New(),
 		config: config,
 		log:    logger,
+		srv:    srv,
 	}
 
 	s.configureRouter()
