@@ -12,7 +12,7 @@ type (
 		GetAll(ctx context.Context, request model.UsersGetAllRequest) (*model.UsersGetAllResponse, error)
 		GetMe(ctx context.Context) (*model.UsersGetMeResponse, error)
 		SetPassword(ctx context.Context, request model.UsersSetPasswordRequest) error
-		GetSubscriptions(ctx context.Context, request model.UsersGetSubscriptionsRequest) (*model.UsersGetSubscriptionsRequest, error)
+		GetSubscriptions(ctx context.Context, request model.UsersGetSubscriptionsRequest) (*model.RecipesGetSubscribedResponse, error)
 		Subscribe(ctx context.Context, request model.UsersSubscribeRequest) (*model.UserSubscribedResponse, error)
 		Unsubscribe(ctx context.Context, request model.UsersUnsubscribeRequest) error
 	}

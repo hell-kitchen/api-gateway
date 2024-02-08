@@ -4,6 +4,7 @@ import (
 	"context"
 	"github.com/hell-kitchen/api-gateway/internal/model"
 	"github.com/hell-kitchen/api-gateway/internal/service"
+	"github.com/labstack/gommon/random"
 )
 
 var (
@@ -20,12 +21,13 @@ func newTokens(srv *Service) {
 	}
 }
 
-func (t *tokensService) Login(ctx context.Context, request model.TokensLoginRequest) (*model.TokensLoginResponse, error) {
-	//TODO implement me
-	panic("implement me")
+func (t *tokensService) Login(context.Context, model.TokensLoginRequest) (*model.TokensLoginResponse, error) {
+	resp := model.TokensLoginResponse{
+		AuthToken: random.String(20, random.Alphanumeric),
+	}
+	return &resp, nil
 }
 
-func (t *tokensService) Logout(ctx context.Context) error {
-	//TODO implement me
-	panic("implement me")
+func (t *tokensService) Logout(context.Context) error {
+	return nil
 }
