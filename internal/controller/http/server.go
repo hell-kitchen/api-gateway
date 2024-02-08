@@ -5,10 +5,12 @@ import (
 	"github.com/google/uuid"
 	"github.com/hell-kitchen/api-gateway/internal/config"
 	"github.com/hell-kitchen/api-gateway/internal/controller/http/mw"
+	"github.com/hell-kitchen/api-gateway/internal/model"
 	"github.com/hell-kitchen/api-gateway/internal/service"
 	"github.com/labstack/echo/v4"
 	"github.com/labstack/echo/v4/middleware"
 	"go.uber.org/zap"
+	"net/http"
 	"time"
 )
 
@@ -68,6 +70,15 @@ func (srv *Server) configureRouter() {
 	srv.router.HideBanner = true
 	srv.configureMiddlewares()
 	srv.configureRoutes()
+	srv.router.HTTPErrorHandler = srv.errorHandler
+}
+
+func (srv *Server) errorHandler(err error, c echo.Context) {
+	resp := model.BaseErrorResponse{Detail: err.Error()}
+
+	if err = c.JSON(http.StatusInternalServerError, resp); err != nil {
+		srv.log.Error("got unexpected error while handling error", zap.Error(err))
+	}
 }
 
 func (srv *Server) configureMiddlewares() {
