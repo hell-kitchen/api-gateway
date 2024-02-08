@@ -9,6 +9,7 @@ import (
 	"github.com/labstack/echo/v4"
 	"github.com/labstack/echo/v4/middleware"
 	"go.uber.org/zap"
+	"time"
 )
 
 // Server is HTTP server struct. Includes logger, router, service, etc.
@@ -41,19 +42,23 @@ func NewServer(config *config.Server, logger *zap.Logger, srv service.Interface)
 	return s, nil
 }
 
-func (srv *Server) OnStart(_ context.Context) error {
-	srv.log.Debug("OnStart hook called")
+func (srv *Server) OnStart(ctx context.Context) error {
+	srv.log.Info("OnStart hook called")
+	ctx, cancel := context.WithCancelCause(ctx)
 	go func() {
+		srv.log.Info("started server")
 		err := srv.router.Start(srv.config.Addr())
 		if err != nil {
+			cancel(err)
 			srv.log.Error("unknown error while starting http server", zap.Error(err))
 		}
 	}()
-	return nil
+	time.Sleep(300 * time.Millisecond)
+	return ctx.Err()
 }
 
 func (srv *Server) OnStop(ctx context.Context) error {
-	srv.log.Debug("OnStop hook called")
+	srv.log.Info("OnStop hook called")
 	err := srv.router.Shutdown(ctx)
 	srv.log.Info("stopped HTTP server", zap.Error(err))
 	return err

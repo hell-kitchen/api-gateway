@@ -26,3 +26,11 @@ tc: testshort c
 .PHONY: lines
 lines:
 	git ls-files | xargs wc -l
+
+.PHONY: dock
+dock:
+	docker build . --tag="vladmarlo/hell_kitchen_gateway:latest"
+
+.PHONY: dock/push
+dock/push:
+	docker push vladmarlo/hell_kitchen_gateway:latest

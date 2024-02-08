@@ -7,8 +7,8 @@ import (
 
 // Server is config to set on which port server will be running.
 type Server struct {
-	BindAddr string `config:"bind-addr"`
-	BindPort int    `config:"bind-port"`
+	BindAddr string `config:"bind-addr,short=a"`
+	BindPort int    `config:"bind-port,short=p"`
 }
 
 // NewServer return new Server config.
