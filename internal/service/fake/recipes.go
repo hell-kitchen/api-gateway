@@ -75,14 +75,55 @@ func (r *recipesService) Create(ctx context.Context, request model.RecipesCreate
 	}, nil
 }
 
-func (r *recipesService) GetByID(ctx context.Context, request model.RecipesGetByIDRequest) (*model.RecipesGetOneResponse, error) {
-	//TODO implement me
-	panic("implement me")
+func (r *recipesService) GetByID(_ context.Context, request model.RecipesGetByIDRequest) (*model.RecipesGetOneResponse, error) {
+	return &model.RecipesGetOneResponse{
+		ID: request.ID,
+		Tags: []model.TagDTO{
+			{
+				ID:    uuid.NewString(),
+				Name:  uuid.NewString(),
+				Color: random.String(6, random.Hex),
+				Slug:  uuid.NewString(),
+			},
+		},
+		Author: model.UserInRecipe{
+			ID:           uuid.NewString(),
+			Email:        random.String(8, random.Alphabetic),
+			Username:     random.String(8, random.Alphabetic),
+			FirstName:    random.String(8, random.Alphabetic),
+			LastName:     random.String(8, random.Alphabetic),
+			IsSubscribed: rand.Int()%2 == 0,
+		},
+		Ingredients:      []model.IngredientInRecipeDTO{},
+		IsFavorited:      rand.Int()%2 == 0,
+		IsInShoppingCart: rand.Int()%2 == 0,
+		Name:             random.String(8, random.Alphabetic),
+		Image:            random.String(20, random.Alphanumeric),
+		Text:             random.String(100, random.Alphabetic, " "),
+		CookingTime:      rand.Int() % 100,
+	}, nil
 }
 
 func (r *recipesService) GetAll(ctx context.Context, request model.RecipesGetAllRequest) (*model.RecipesGetManyResponse, error) {
-	//TODO implement me
-	panic("implement me")
+	return &model.RecipesGetManyResponse{
+		Count:    0,
+		Next:     "",
+		Previous: "",
+		Results: []model.RecipeDTO{
+			{
+				ID:               uuid.NewString(),
+				Tags:             []model.TagDTO{},
+				Author:           model.UserInRecipe{},
+				Ingredients:      []model.IngredientInRecipeDTO{},
+				IsFavorited:      rand.Int()%2 == 0,
+				IsInShoppingCart: rand.Int()%2 == 0,
+				Name:             random.String(10, random.Alphabetic),
+				Image:            random.String(10, random.Alphabetic),
+				Text:             random.String(10, random.Alphabetic),
+				CookingTime:      rand.Int()%100 + 1,
+			},
+		},
+	}, nil
 }
 
 func (r *recipesService) Update(ctx context.Context, request model.RecipesUpdateByIDRequest) (*model.RecipesUpdateOneResponse, error) {
@@ -100,7 +141,7 @@ func (r *recipesService) Update(ctx context.Context, request model.RecipesUpdate
 	}, nil
 }
 
-func (r *recipesService) Delete(ctx context.Context, request model.RecipesDeleteByIDRequest) error {
+func (r *recipesService) Delete(context.Context, model.RecipesDeleteByIDRequest) error {
 	return nil
 }
 
