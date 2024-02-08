@@ -1,8 +1,6 @@
 services:
   server:
-    build:
-      context: .
-      target: final
+    image: vladmarlo/hell_kitchen_gateway:latest
     ports:
       - 8000:8000
     environment:
