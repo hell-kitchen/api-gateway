@@ -86,31 +86,46 @@ func (r *recipesService) GetAll(ctx context.Context, request model.RecipesGetAll
 }
 
 func (r *recipesService) Update(ctx context.Context, request model.RecipesUpdateByIDRequest) (*model.RecipesUpdateOneResponse, error) {
-	//TODO implement me
-	panic("implement me")
+	return &model.RecipesUpdateOneResponse{
+		ID:               request.ID,
+		Tags:             nil,
+		Author:           model.UserInRecipe{},
+		Ingredients:      nil,
+		IsFavorited:      false,
+		IsInShoppingCart: false,
+		Name:             request.Name,
+		Image:            request.Image,
+		Text:             request.Text,
+		CookingTime:      request.CookingTime,
+	}, nil
 }
 
 func (r *recipesService) Delete(ctx context.Context, request model.RecipesDeleteByIDRequest) error {
-	//TODO implement me
-	panic("implement me")
+	return nil
 }
 
 func (r *recipesService) AddToShoppingCart(ctx context.Context, request model.RecipesAddRecipeToShoppingCartRequest) (*model.RecipesAddedToShoppingCartResponse, error) {
-	//TODO implement me
-	panic("implement me")
+	return &model.RecipesAddedToShoppingCartResponse{
+		ID:          request.ID,
+		Name:        uuid.NewString(),
+		Image:       random.String(uint8(rand.Int()%40+1), random.Alphabetic),
+		CookingTime: rand.Int() % 100,
+	}, nil
 }
 
 func (r *recipesService) RemoveFromShoppingCart(ctx context.Context, request model.RecipesRemoveRecipeFromShoppingCartRequest) error {
-	//TODO implement me
-	panic("implement me")
+	return nil
 }
 
 func (r *recipesService) AddToFavorite(ctx context.Context, request model.RecipesAddRecipeToFavoriteRequest) (*model.RecipesAddedToFavoriteResponse, error) {
-	//TODO implement me
-	panic("implement me")
+	return &model.RecipesAddedToFavoriteResponse{
+		ID:          request.ID,
+		Name:        uuid.NewString(),
+		Image:       random.String(uint8(rand.Int()%40+1), random.Alphabetic),
+		CookingTime: rand.Int() % 100,
+	}, nil
 }
 
 func (r *recipesService) RemoveFromFavorite(ctx context.Context, request model.RecipesRemoveRecipeFromFavoriteRequest) error {
-	//TODO implement me
-	panic("implement me")
+	return nil
 }
