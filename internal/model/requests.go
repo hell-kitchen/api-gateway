@@ -14,7 +14,7 @@ type (
 		Password  string `json:"password"`
 	}
 	UsersGetByIDRequest struct {
-		ID string `json:"-" path:"id"`
+		ID string `json:"-" param:"id"`
 	}
 	UsersSetPasswordRequest struct {
 		NewPassword     string `json:"new_password"`
@@ -26,18 +26,18 @@ type (
 		RecipesLimit int `json:"-" query:"recipes_limit"`
 	}
 	UsersSubscribeRequest struct {
-		ID           string `json:"-" path:"id"`
+		ID           string `json:"-" param:"id"`
 		RecipesLimit int    `json:"-" query:"recipes_limit"`
 	}
 	UsersUnsubscribeRequest struct {
-		ID string `path:"id" json:"-"`
+		ID string `param:"id" json:"-"`
 	}
 	TokensLoginRequest struct {
 		Password string `json:"password"`
 		Email    string `json:"email"`
 	}
 	TagsGetByIDRequest struct {
-		ID string `path:"id" json:"-"`
+		ID string `param:"id" json:"-"`
 	}
 	// RecipesGetAllRequest godoc.
 	//
@@ -59,10 +59,10 @@ type (
 		CookingTime int                             `json:"cooking_time"`
 	}
 	RecipesGetByIDRequest struct {
-		ID string `path:"id" json:"-"`
+		ID string `param:"id" json:"-"`
 	}
 	RecipesUpdateByIDRequest struct {
-		ID          string                          `json:"-" path:"id"`
+		ID          string                          `json:"-" param:"id"`
 		Ingredients []IngredientInRecipeCreationDTO `json:"ingredients"`
 		Tags        []int                           `json:"tags"`
 		Image       string                          `json:"image"`
@@ -71,24 +71,24 @@ type (
 		CookingTime int                             `json:"cooking_time"`
 	}
 	RecipesDeleteByIDRequest struct {
-		ID string `path:"id" json:"-"`
+		ID string `param:"id" json:"-"`
 	}
 	RecipesAddRecipeToShoppingCartRequest struct {
-		ID string `path:"id" json:"-"`
+		ID string `param:"id" json:"-"`
 	}
 	RecipesRemoveRecipeFromShoppingCartRequest struct {
-		ID string `path:"id" json:"-"`
+		ID string `param:"id" json:"-"`
 	}
 	RecipesAddRecipeToFavoriteRequest struct {
-		ID string `path:"id" json:"-"`
+		ID string `param:"id" json:"-"`
 	}
 	RecipesRemoveRecipeFromFavoriteRequest struct {
-		ID string `path:"id" json:"-"`
+		ID string `param:"id" json:"-"`
 	}
 	IngredientsGetAllRequest struct {
 		Name string `json:"-" query:"name"`
 	}
 	IngredientsGetByIDRequest struct {
-		ID string `json:"-" path:"id"`
+		ID string `json:"-" param:"id"`
 	}
 )
