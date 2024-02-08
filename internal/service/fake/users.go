@@ -48,20 +48,8 @@ func (u *usersService) GetByID(_ context.Context, request model.UsersGetByIDRequ
 
 func (u *usersService) GetAll(ctx context.Context, request model.UsersGetAllRequest) (*model.UsersGetAllResponse, error) {
 	count := rand.Int() % 200
-	create := count - request.Page*request.Limit
-	if create < 0 {
-		return &model.UsersGetAllResponse{
-			Count:        count,
-			NextPage:     "",
-			PreviousPage: "",
-			Results:      []model.UserInSubscriptions{},
-		}, nil
-	}
-	if create > request.Limit {
-		create = request.Limit
-	}
 	var resp []model.UserInSubscriptions
-	for i := 0; i != create; i++ {
+	for i := 0; i != count; i++ {
 		resp = append(resp, model.UserInSubscriptions{
 			Email:        random.String(10, random.Alphanumeric, "@"),
 			ID:           uuid.NewString(),

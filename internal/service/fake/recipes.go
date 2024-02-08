@@ -104,7 +104,7 @@ func (r *recipesService) GetByID(_ context.Context, request model.RecipesGetByID
 	}, nil
 }
 
-func (r *recipesService) GetAll(context.Context, model.RecipesGetAllRequest) (*model.RecipesGetManyResponse, error) {
+func (r *recipesService) GetAll(_ context.Context, req model.RecipesGetAllRequest) (*model.RecipesGetManyResponse, error) {
 	return &model.RecipesGetManyResponse{
 		Count:    0,
 		Next:     "",
@@ -115,8 +115,8 @@ func (r *recipesService) GetAll(context.Context, model.RecipesGetAllRequest) (*m
 				Tags:             []model.TagDTO{},
 				Author:           model.UserInRecipe{},
 				Ingredients:      []model.IngredientInRecipeDTO{},
-				IsFavorited:      rand.Int()%2 == 0,
-				IsInShoppingCart: rand.Int()%2 == 0,
+				IsFavorited:      rand.Int()%2 == 0 || req.IsFavorited == 1,
+				IsInShoppingCart: rand.Int()%2 == 0 || req.IsInShoppingCart == 1,
 				Name:             random.String(10, random.Alphabetic),
 				Image:            random.String(10, random.Alphabetic),
 				Text:             random.String(10, random.Alphabetic),
