@@ -99,46 +99,70 @@ func (srv *Server) configureRoutes() {
 	usersRouter := apiRouter.Group("/users")
 	{
 		// Users subgroup
+		usersRouter.GET("", srv.UsersGetAll)
 		usersRouter.GET("/", srv.UsersGetAll)
+		usersRouter.POST("", srv.UsersCreate)
 		usersRouter.POST("/", srv.UsersCreate)
 		usersRouter.GET("/me", srv.UsersGetMe)
+		usersRouter.GET("/me/", srv.UsersGetMe)
 		usersRouter.POST("/set_password", srv.UsersSetPassword)
+		usersRouter.POST("/set_password/", srv.UsersSetPassword)
 
 		// Subscriptions subgroup
 		usersRouter.GET("/subscriptions", srv.UsersGetSubscriptions)
+		usersRouter.GET("/subscriptions/", srv.UsersGetSubscriptions)
 		usersRouter.GET("/:id", srv.UsersGetByID)
+		usersRouter.GET("/:id/", srv.UsersGetByID)
 		usersRouter.POST("/:id/subscribe", srv.UsersSubscribe)
-		usersRouter.POST("/:id/subscribe", srv.UsersUnsubscribe)
+		usersRouter.POST("/:id/subscribe/", srv.UsersSubscribe)
+		usersRouter.DELETE("/:id/subscribe", srv.UsersUnsubscribe)
+		usersRouter.DELETE("/:id/subscribe/", srv.UsersUnsubscribe)
 	}
 	tokensRouter := apiRouter.Group("/auth/token")
 	{
 		tokensRouter.POST("/login", srv.TokensLogin)
+		tokensRouter.POST("/login/", srv.TokensLogin)
 		tokensRouter.POST("/logout", srv.TokensLogin)
+		tokensRouter.POST("/logout/", srv.TokensLogin)
 	}
 	tagsRouter := apiRouter.Group("/tags")
 	{
+		tagsRouter.GET("", srv.TagsGetAll)
 		tagsRouter.GET("/", srv.TagsGetAll)
 		tagsRouter.GET("/:id", srv.TagsGetByID)
+		tagsRouter.GET("/:id/", srv.TagsGetByID)
 	}
 	recipesRouter := apiRouter.Group("/recipes")
 	{
+		recipesRouter.GET("", srv.RecipesGetAll)
 		recipesRouter.GET("/", srv.RecipesGetAll)
+		recipesRouter.POST("", srv.RecipesCreate)
 		recipesRouter.POST("/", srv.RecipesCreate)
 		recipesRouter.GET("/:id", srv.RecipesGetByID)
+		recipesRouter.GET("/:id/", srv.RecipesGetByID)
 		recipesRouter.PATCH("/:id", srv.RecipesUpdateByID)
+		recipesRouter.PATCH("/:id/", srv.RecipesUpdateByID)
 		recipesRouter.DELETE("/:id", srv.RecipesDeleteByID)
+		recipesRouter.DELETE("/:id/", srv.RecipesDeleteByID)
 
 		recipesRouter.GET("/download_shopping_cart", srv.RecipesDownloadShoppingCart)
+		recipesRouter.GET("/download_shopping_cart/", srv.RecipesDownloadShoppingCart)
 		recipesRouter.POST("/:id/shopping_cart", srv.RecipesAddRecipeToShoppingCart)
+		recipesRouter.POST("/:id/shopping_cart/", srv.RecipesAddRecipeToShoppingCart)
 		recipesRouter.DELETE("/:id/shopping_cart", srv.RecipesRemoveRecipeFromShoppingCart)
+		recipesRouter.DELETE("/:id/shopping_cart/", srv.RecipesRemoveRecipeFromShoppingCart)
 
 		recipesRouter.POST("/:id/favorite", srv.RecipesAddRecipeToFavorite)
+		recipesRouter.POST("/:id/favorite/", srv.RecipesAddRecipeToFavorite)
 		recipesRouter.DELETE("/:id/favorite", srv.RecipesRemoveRecipeFromFavorite)
+		recipesRouter.DELETE("/:id/favorite/", srv.RecipesRemoveRecipeFromFavorite)
 	}
 
 	ingredientsRouter := apiRouter.Group("/ingredients")
 	{
+		ingredientsRouter.GET("", srv.IngredientsGetAll)
 		ingredientsRouter.GET("/", srv.IngredientsGetAll)
 		ingredientsRouter.GET("/:id", srv.IngredientsGetByID)
+		ingredientsRouter.GET("/:id/", srv.IngredientsGetByID)
 	}
 }
