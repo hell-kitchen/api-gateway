@@ -104,7 +104,7 @@ func (r *recipesService) GetByID(_ context.Context, request model.RecipesGetByID
 	}, nil
 }
 
-func (r *recipesService) GetAll(ctx context.Context, request model.RecipesGetAllRequest) (*model.RecipesGetManyResponse, error) {
+func (r *recipesService) GetAll(context.Context, model.RecipesGetAllRequest) (*model.RecipesGetManyResponse, error) {
 	return &model.RecipesGetManyResponse{
 		Count:    0,
 		Next:     "",
@@ -126,7 +126,7 @@ func (r *recipesService) GetAll(ctx context.Context, request model.RecipesGetAll
 	}, nil
 }
 
-func (r *recipesService) Update(ctx context.Context, request model.RecipesUpdateByIDRequest) (*model.RecipesUpdateOneResponse, error) {
+func (r *recipesService) Update(_ context.Context, request model.RecipesUpdateByIDRequest) (*model.RecipesUpdateOneResponse, error) {
 	return &model.RecipesUpdateOneResponse{
 		ID:               request.ID,
 		Tags:             nil,
@@ -145,7 +145,7 @@ func (r *recipesService) Delete(context.Context, model.RecipesDeleteByIDRequest)
 	return nil
 }
 
-func (r *recipesService) AddToShoppingCart(ctx context.Context, request model.RecipesAddRecipeToShoppingCartRequest) (*model.RecipesAddedToShoppingCartResponse, error) {
+func (r *recipesService) AddToShoppingCart(_ context.Context, request model.RecipesAddRecipeToShoppingCartRequest) (*model.RecipesAddedToShoppingCartResponse, error) {
 	return &model.RecipesAddedToShoppingCartResponse{
 		ID:          request.ID,
 		Name:        uuid.NewString(),
@@ -154,11 +154,11 @@ func (r *recipesService) AddToShoppingCart(ctx context.Context, request model.Re
 	}, nil
 }
 
-func (r *recipesService) RemoveFromShoppingCart(ctx context.Context, request model.RecipesRemoveRecipeFromShoppingCartRequest) error {
+func (r *recipesService) RemoveFromShoppingCart(context.Context, model.RecipesRemoveRecipeFromShoppingCartRequest) error {
 	return nil
 }
 
-func (r *recipesService) AddToFavorite(ctx context.Context, request model.RecipesAddRecipeToFavoriteRequest) (*model.RecipesAddedToFavoriteResponse, error) {
+func (r *recipesService) AddToFavorite(_ context.Context, request model.RecipesAddRecipeToFavoriteRequest) (*model.RecipesAddedToFavoriteResponse, error) {
 	return &model.RecipesAddedToFavoriteResponse{
 		ID:          request.ID,
 		Name:        uuid.NewString(),
@@ -167,6 +167,6 @@ func (r *recipesService) AddToFavorite(ctx context.Context, request model.Recipe
 	}, nil
 }
 
-func (r *recipesService) RemoveFromFavorite(ctx context.Context, request model.RecipesRemoveRecipeFromFavoriteRequest) error {
+func (r *recipesService) RemoveFromFavorite(context.Context, model.RecipesRemoveRecipeFromFavoriteRequest) error {
 	return nil
 }
