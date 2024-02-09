@@ -11,6 +11,7 @@ type Server struct {
 	BindAddr   string        `config:"bind-addr,short=a"`
 	BindPort   int           `config:"bind-port,short=p"`
 	BindHost   string        `config:"bind-host"`
+	UseHTTPS   bool          `config:"https"`
 	Timeout    time.Duration `config:"server-timeout"`
 	AllowHosts []string      `config:"allow-hosts"`
 	fullAddr   string
@@ -24,12 +25,14 @@ func NewServer() (*Server, error) {
 		BindAddr: "localhost",
 		BindPort: 8080,
 		BindHost: "localhost",
+		UseHTTPS: false,
+		Timeout:  time.Second,
 		AllowHosts: []string{
 			"localhost",
 			"127.0.0.1",
 			"0.0.0.0",
 		},
-		Timeout: time.Second,
+		fullAddr: "",
 	}
 	if err := getConfitaLoader().Load(ctx, s); err != nil {
 		return nil, fmt.Errorf("error while loading config: %w", err)
