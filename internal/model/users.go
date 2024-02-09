@@ -26,6 +26,6 @@ type (
 		LastName     string                       `json:"last_name"`
 		IsSubscribed bool                         `json:"is_subscribed"`
 		Recipes      []RecipeInUsersSubscriptions `json:"recipes"`
-		RecipesCount int                          `json:"recipes_count"`
+		RecipesCount uint32                       `json:"recipes_count"`
 	}
 )

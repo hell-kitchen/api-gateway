@@ -239,7 +239,7 @@ func easyjson559270aeDecodeGithubComHellKitchenApiGatewayInternalModel2(in *jlex
 		}
 		switch key {
 		case "count":
-			out.Count = int(in.Int())
+			out.Count = int32(in.Int32())
 		case "next":
 			out.NextPage = string(in.String())
 		case "previous":
@@ -284,7 +284,7 @@ func easyjson559270aeEncodeGithubComHellKitchenApiGatewayInternalModel2(out *jwr
 	{
 		const prefix string = ",\"count\":"
 		out.RawString(prefix[1:])
-		out.Int(int(in.Count))
+		out.Int32(int32(in.Count))
 	}
 	{
 		const prefix string = ",\"next\":"
@@ -595,7 +595,7 @@ func easyjson559270aeDecodeGithubComHellKitchenApiGatewayInternalModel6(in *jlex
 		}
 		switch key {
 		case "count":
-			out.Count = int(in.Int())
+			out.Count = uint32(in.Uint32())
 		case "next":
 			out.Next = string(in.String())
 		case "previous":
@@ -640,7 +640,7 @@ func easyjson559270aeEncodeGithubComHellKitchenApiGatewayInternalModel6(out *jwr
 	{
 		const prefix string = ",\"count\":"
 		out.RawString(prefix[1:])
-		out.Int(int(in.Count))
+		out.Uint32(uint32(in.Count))
 	}
 	{
 		const prefix string = ",\"next\":"
@@ -749,7 +749,7 @@ func easyjson559270aeDecodeGithubComHellKitchenApiGatewayInternalModel7(in *jlex
 				in.Delim(']')
 			}
 		case "recipes_count":
-			out.RecipesCount = int(in.Int())
+			out.RecipesCount = uint32(in.Uint32())
 		default:
 			in.SkipRecursive()
 		}
@@ -813,7 +813,7 @@ func easyjson559270aeEncodeGithubComHellKitchenApiGatewayInternalModel7(out *jwr
 	{
 		const prefix string = ",\"recipes_count\":"
 		out.RawString(prefix)
-		out.Int(int(in.RecipesCount))
+		out.Uint32(uint32(in.RecipesCount))
 	}
 	out.RawByte('}')
 }
@@ -837,7 +837,7 @@ func easyjson559270aeDecodeGithubComHellKitchenApiGatewayInternalModel8(in *jlex
 		}
 		switch key {
 		case "count":
-			out.Count = int(in.Int())
+			out.Count = int32(in.Int32())
 		case "next":
 			out.Next = string(in.String())
 		case "previous":
@@ -882,7 +882,7 @@ func easyjson559270aeEncodeGithubComHellKitchenApiGatewayInternalModel8(out *jwr
 	{
 		const prefix string = ",\"count\":"
 		out.RawString(prefix[1:])
-		out.Int(int(in.Count))
+		out.Int32(int32(in.Count))
 	}
 	{
 		const prefix string = ",\"next\":"
@@ -962,7 +962,7 @@ func easyjson559270aeDecodeGithubComHellKitchenApiGatewayInternalModel9(in *jlex
 		case "image":
 			out.Image = string(in.String())
 		case "cooking_time":
-			out.CookingTime = int(in.Int())
+			out.CookingTime = uint32(in.Uint32())
 		default:
 			in.SkipRecursive()
 		}
@@ -995,7 +995,7 @@ func easyjson559270aeEncodeGithubComHellKitchenApiGatewayInternalModel9(out *jwr
 	{
 		const prefix string = ",\"cooking_time\":"
 		out.RawString(prefix)
-		out.Int(int(in.CookingTime))
+		out.Uint32(uint32(in.CookingTime))
 	}
 	out.RawByte('}')
 }
@@ -1049,7 +1049,7 @@ func easyjson559270aeDecodeGithubComHellKitchenApiGatewayInternalModel10(in *jle
 		case "image":
 			out.Image = string(in.String())
 		case "cooking_time":
-			out.CookingTime = int(in.Int())
+			out.CookingTime = uint32(in.Uint32())
 		default:
 			in.SkipRecursive()
 		}
@@ -1082,7 +1082,7 @@ func easyjson559270aeEncodeGithubComHellKitchenApiGatewayInternalModel10(out *jw
 	{
 		const prefix string = ",\"cooking_time\":"
 		out.RawString(prefix)
-		out.Int(int(in.CookingTime))
+		out.Uint32(uint32(in.CookingTime))
 	}
 	out.RawByte('}')
 }

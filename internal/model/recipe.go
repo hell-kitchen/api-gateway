@@ -12,12 +12,12 @@ type (
 		Name             string                  `json:"name"`
 		Image            string                  `json:"image"`
 		Text             string                  `json:"text"`
-		CookingTime      int                     `json:"cooking_time"`
+		CookingTime      uint32                  `json:"cooking_time"`
 	}
 	RecipeInUsersSubscriptions struct {
 		ID          string `json:"id"`
 		Name        string `json:"name"`
 		Image       string `json:"image"`
-		CookingTime int    `json:"cooking_time"`
+		CookingTime uint32 `json:"cooking_time"`
 	}
 )

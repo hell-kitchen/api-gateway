@@ -3,8 +3,8 @@ package model
 
 type (
 	UsersGetAllRequest struct {
-		Page  int `json:"-" query:"page"`
-		Limit int `json:"-" query:"limit"`
+		Page  int32 `json:"-" query:"page"`
+		Limit int32 `json:"-" query:"limit"`
 	}
 	UsersCreateRequest struct {
 		Email     string `json:"email"`
@@ -21,13 +21,13 @@ type (
 		CurrentPassword string `json:"current_password"`
 	}
 	UsersGetSubscriptionsRequest struct {
-		Page         int `json:"-" query:"page"`
-		Limit        int `json:"-" query:"limit"`
-		RecipesLimit int `json:"-" query:"recipes_limit"`
+		Page         int32 `json:"-" query:"page"`
+		Limit        int32 `json:"-" query:"limit"`
+		RecipesLimit int32 `json:"-" query:"recipes_limit"`
 	}
 	UsersSubscribeRequest struct {
 		ID           string `json:"-" param:"id"`
-		RecipesLimit int    `json:"-" query:"recipes_limit"`
+		RecipesLimit int32  `json:"-" query:"recipes_limit"`
 	}
 	UsersUnsubscribeRequest struct {
 		ID string `param:"id" json:"-"`
@@ -43,10 +43,10 @@ type (
 	//
 	// TODO: check how to check was value in request or not
 	RecipesGetAllRequest struct {
-		Page             int      `query:"page" json:"-"`
-		Limit            int      `query:"limit" json:"-"`
-		IsFavorited      int      `query:"is_favorited" json:"-"`
-		IsInShoppingCart int      `query:"is_in_shopping_cart" json:"-"`
+		Page             int32    `query:"page" json:"-"`
+		Limit            int32    `query:"limit" json:"-"`
+		IsFavorited      int32    `query:"is_favorited" json:"-"`
+		IsInShoppingCart int32    `query:"is_in_shopping_cart" json:"-"`
 		Author           string   `query:"author" json:"-"`
 		Tags             []string `query:"tags" json:"-"`
 	}
@@ -56,7 +56,7 @@ type (
 		Image       string                          `json:"image"`
 		Name        string                          `json:"name"`
 		Text        string                          `json:"text"`
-		CookingTime int                             `json:"cooking_time"`
+		CookingTime uint32                          `json:"cooking_time"`
 	}
 	RecipesGetByIDRequest struct {
 		ID string `param:"id" json:"-"`
@@ -64,11 +64,11 @@ type (
 	RecipesUpdateByIDRequest struct {
 		ID          string                          `json:"-" param:"id"`
 		Ingredients []IngredientInRecipeCreationDTO `json:"ingredients"`
-		Tags        []int                           `json:"tags"`
+		Tags        []string                        `json:"tags"`
 		Image       string                          `json:"image"`
 		Name        string                          `json:"name"`
 		Text        string                          `json:"text"`
-		CookingTime int                             `json:"cooking_time"`
+		CookingTime int32                           `json:"cooking_time"`
 	}
 	RecipesDeleteByIDRequest struct {
 		ID string `param:"id" json:"-"`

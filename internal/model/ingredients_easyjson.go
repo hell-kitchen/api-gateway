@@ -43,7 +43,7 @@ func easyjsonC156496aDecodeGithubComHellKitchenApiGatewayInternalModel(in *jlexe
 		case "measurement_unit":
 			out.MeasurementUnit = string(in.String())
 		case "amount":
-			out.Amount = int(in.Int())
+			out.Amount = uint32(in.Uint32())
 		default:
 			in.SkipRecursive()
 		}
@@ -76,7 +76,7 @@ func easyjsonC156496aEncodeGithubComHellKitchenApiGatewayInternalModel(out *jwri
 	{
 		const prefix string = ",\"amount\":"
 		out.RawString(prefix)
-		out.Int(int(in.Amount))
+		out.Uint32(uint32(in.Amount))
 	}
 	out.RawByte('}')
 }
@@ -126,7 +126,7 @@ func easyjsonC156496aDecodeGithubComHellKitchenApiGatewayInternalModel1(in *jlex
 		case "id":
 			out.ID = string(in.String())
 		case "amount":
-			out.Amount = int(in.Int())
+			out.Amount = uint32(in.Uint32())
 		default:
 			in.SkipRecursive()
 		}
@@ -149,7 +149,7 @@ func easyjsonC156496aEncodeGithubComHellKitchenApiGatewayInternalModel1(out *jwr
 	{
 		const prefix string = ",\"amount\":"
 		out.RawString(prefix)
-		out.Int(int(in.Amount))
+		out.Uint32(uint32(in.Amount))
 	}
 	out.RawByte('}')
 }

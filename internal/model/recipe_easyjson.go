@@ -43,7 +43,7 @@ func easyjsonAf04a44aDecodeGithubComHellKitchenApiGatewayInternalModel(in *jlexe
 		case "image":
 			out.Image = string(in.String())
 		case "cooking_time":
-			out.CookingTime = int(in.Int())
+			out.CookingTime = uint32(in.Uint32())
 		default:
 			in.SkipRecursive()
 		}
@@ -76,7 +76,7 @@ func easyjsonAf04a44aEncodeGithubComHellKitchenApiGatewayInternalModel(out *jwri
 	{
 		const prefix string = ",\"cooking_time\":"
 		out.RawString(prefix)
-		out.Int(int(in.CookingTime))
+		out.Uint32(uint32(in.CookingTime))
 	}
 	out.RawByte('}')
 }
@@ -184,7 +184,7 @@ func easyjsonAf04a44aDecodeGithubComHellKitchenApiGatewayInternalModel1(in *jlex
 		case "text":
 			out.Text = string(in.String())
 		case "cooking_time":
-			out.CookingTime = int(in.Int())
+			out.CookingTime = uint32(in.Uint32())
 		default:
 			in.SkipRecursive()
 		}
@@ -269,7 +269,7 @@ func easyjsonAf04a44aEncodeGithubComHellKitchenApiGatewayInternalModel1(out *jwr
 	{
 		const prefix string = ",\"cooking_time\":"
 		out.RawString(prefix)
-		out.Int(int(in.CookingTime))
+		out.Uint32(uint32(in.CookingTime))
 	}
 	out.RawByte('}')
 }

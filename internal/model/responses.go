@@ -3,7 +3,7 @@ package model
 
 type (
 	UsersGetAllResponse struct {
-		Count        int                   `json:"count"`
+		Count        int32                 `json:"count"`
 		NextPage     string                `json:"next"`
 		PreviousPage string                `json:"previous"`
 		Results      []UserInSubscriptions `json:"results"`
@@ -40,7 +40,7 @@ type (
 	TagsGetManyResponse    []TagDTO
 	TagsGetOneResponse     TagDTO
 	RecipesGetManyResponse struct {
-		Count    int         `json:"count"`
+		Count    int32       `json:"count"`
 		Next     string      `json:"next"`
 		Previous string      `json:"previous"`
 		Results  []RecipeDTO `json:"results"`
@@ -52,16 +52,16 @@ type (
 		ID          string `json:"id"`
 		Name        string `json:"name"`
 		Image       string `json:"image"`
-		CookingTime int    `json:"cooking_time"`
+		CookingTime uint32 `json:"cooking_time"`
 	}
 	RecipesAddedToFavoriteResponse struct {
 		ID          string `json:"id"`
 		Name        string `json:"name"`
 		Image       string `json:"image"`
-		CookingTime int    `json:"cooking_time"`
+		CookingTime uint32 `json:"cooking_time"`
 	}
 	RecipesGetSubscribedResponse struct {
-		Count    int                         `json:"count"`
+		Count    uint32                      `json:"count"`
 		Next     string                      `json:"next"`
 		Previous string                      `json:"previous"`
 		Results  []UserInSubscriptionsResult `json:"results"`
