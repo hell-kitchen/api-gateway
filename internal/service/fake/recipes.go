@@ -100,7 +100,7 @@ func (r *recipesService) GetByID(_ context.Context, request model.RecipesGetByID
 		Name:             random.String(8, random.Alphabetic),
 		Image:            random.String(20, random.Alphanumeric),
 		Text:             random.String(100, random.Alphabetic, " "),
-		CookingTime:      rand.Int() % 100,
+		CookingTime:      uint32(rand.Int() % 100),
 	}, nil
 }
 
@@ -120,7 +120,7 @@ func (r *recipesService) GetAll(_ context.Context, req model.RecipesGetAllReques
 				Name:             random.String(10, random.Alphabetic),
 				Image:            random.String(10, random.Alphabetic),
 				Text:             random.String(10, random.Alphabetic),
-				CookingTime:      rand.Int()%100 + 1,
+				CookingTime:      uint32(rand.Int()%100) + 1,
 			},
 		},
 	}, nil
@@ -137,7 +137,8 @@ func (r *recipesService) Update(_ context.Context, request model.RecipesUpdateBy
 		Name:             request.Name,
 		Image:            request.Image,
 		Text:             request.Text,
-		CookingTime:      request.CookingTime,
+		// TODO: fix uint32 in requests
+		CookingTime: uint32(request.CookingTime),
 	}, nil
 }
 
@@ -150,7 +151,7 @@ func (r *recipesService) AddToShoppingCart(_ context.Context, request model.Reci
 		ID:          request.ID,
 		Name:        uuid.NewString(),
 		Image:       random.String(uint8(rand.Int()%40+1), random.Alphabetic),
-		CookingTime: rand.Int() % 100,
+		CookingTime: uint32(rand.Int() % 100),
 	}, nil
 }
 
@@ -163,7 +164,7 @@ func (r *recipesService) AddToFavorite(_ context.Context, request model.RecipesA
 		ID:          request.ID,
 		Name:        uuid.NewString(),
 		Image:       random.String(uint8(rand.Int()%40+1), random.Alphabetic),
-		CookingTime: rand.Int() % 100,
+		CookingTime: uint32(rand.Int() % 100),
 	}, nil
 }
 
