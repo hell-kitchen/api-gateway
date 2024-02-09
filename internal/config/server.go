@@ -3,6 +3,7 @@ package config
 import (
 	"context"
 	"fmt"
+	"github.com/hell-kitchen/pkg/confita"
 	"time"
 )
 
@@ -34,7 +35,7 @@ func NewServer() (*Server, error) {
 		},
 		fullAddr: "",
 	}
-	if err := getConfitaLoader().Load(ctx, s); err != nil {
+	if err := confita.Get().Load(ctx, s); err != nil {
 		return nil, fmt.Errorf("error while loading config: %w", err)
 	}
 	s.fullAddr = fmt.Sprintf("http://%s", s.BindHost)
