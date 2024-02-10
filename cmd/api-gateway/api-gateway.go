@@ -25,6 +25,7 @@ func NewOptions() fx.Option {
 		fx.Invoke(
 			addServerStartup,
 		),
+		fx.NopLogger,
 	)
 }
 
