@@ -9,14 +9,20 @@ type (
 		Results      []UserInSubscriptions `json:"results"`
 	}
 	UsersGetByIDResponse struct {
-		Email        string `json:"email"`
+		// ID is string.
+		//
+		// It could be any string, but mostly is UUID v4 string.
 		ID           string `json:"id"`
+		Email        string `json:"email"`
 		Username     string `json:"username"`
 		FirstName    string `json:"first_name"`
 		LastName     string `json:"last_name"`
 		IsSubscribed bool   `json:"is_subscribed"`
 	}
 	UsersCreateResponse struct {
+		// ID is string.
+		//
+		// It could be any string, but mostly is UUID v4 string.
 		ID        string `json:"id"`
 		Email     string `json:"email"`
 		Username  string `json:"username"`
@@ -27,8 +33,11 @@ type (
 		Detail string `json:"detail"`
 	}
 	UsersGetMeResponse struct {
-		Email        string `json:"email"`
+		// ID is string.
+		//
+		// It could be any string, but mostly is UUID v4 string.
 		ID           string `json:"id"`
+		Email        string `json:"email"`
 		Username     string `json:"username"`
 		FirstName    string `json:"first_name"`
 		LastName     string `json:"last_name"`
@@ -49,12 +58,18 @@ type (
 	RecipesGetOneResponse              RecipeDTO
 	RecipesUpdateOneResponse           RecipeDTO
 	RecipesAddedToShoppingCartResponse struct {
+		// ID is string.
+		//
+		// It could be any string, but mostly is UUID v4 string.
 		ID          string `json:"id"`
 		Name        string `json:"name"`
 		Image       string `json:"image"`
 		CookingTime uint32 `json:"cooking_time"`
 	}
 	RecipesAddedToFavoriteResponse struct {
+		// ID is string.
+		//
+		// It could be any string, but mostly is UUID v4 string.
 		ID          string `json:"id"`
 		Name        string `json:"name"`
 		Image       string `json:"image"`
@@ -68,6 +83,9 @@ type (
 	}
 	UserSubscribedResponse     UserInSubscriptionsResult
 	IngredientsGetByIDResponse struct {
+		// ID is string.
+		//
+		// It could be any string, but mostly is UUID v4 string.
 		ID              string `json:"id"`
 		Name            string `json:"name"`
 		MeasurementUnit string `json:"measurement_unit"`
