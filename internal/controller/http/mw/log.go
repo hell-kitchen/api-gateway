@@ -1,10 +1,11 @@
 package mw
 
 import (
+	"sync"
+
 	"github.com/labstack/echo/v4"
 	"github.com/labstack/echo/v4/middleware"
 	"go.uber.org/zap"
-	"sync"
 )
 
 var (
@@ -25,12 +26,15 @@ var (
 
 // LogMiddleware is middleware which logs all necessary data.
 func LogMiddleware(logger *zap.Logger) echo.MiddlewareFunc {
-	_loggerMu.Lock()
-	_logger = logger
-	_loggerMu.Unlock()
+	if logger != nil {
+		_loggerMu.Lock()
+		_logger = logger
+		_loggerMu.Unlock()
+	}
 	return middleware.RequestLoggerWithConfig(logConfig)
 }
 
+// logValuesFunc is helper function to log request data.
 func logValuesFunc(_ echo.Context, v middleware.RequestLoggerValues) error {
 	_loggerMu.RLock()
 	_logger.Info(
