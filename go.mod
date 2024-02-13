@@ -5,6 +5,7 @@ go 1.20
 require (
 	github.com/google/uuid v1.6.0
 	github.com/hell-kitchen/pkg/confita v0.0.0-20240209210517-f9cadd513507
+	github.com/hell-kitchen/pkg/logger v0.0.0-20240213131251-31423461296e
 	github.com/labstack/echo/v4 v4.11.4
 	github.com/labstack/gommon v0.4.2
 	github.com/mailru/easyjson v0.7.7
