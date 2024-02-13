@@ -3,7 +3,7 @@ package service
 import (
 	"context"
 
-	"github.com/hell-kitchen/api-gateway/internal/model"
+	"github.com/hell-kitchen/api-gateway/pkg/model"
 )
 
 type (

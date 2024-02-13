@@ -1,6 +1,6 @@
 package fake
 
-import "github.com/hell-kitchen/api-gateway/internal/service"
+import "github.com/hell-kitchen/api-gateway/pkg/service"
 
 var _ service.Interface = (*Service)(nil)
 
