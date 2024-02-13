@@ -1,7 +1,7 @@
 package http
 
 import (
-	"github.com/hell-kitchen/api-gateway/internal/model"
+	"github.com/hell-kitchen/api-gateway/pkg/model"
 	"github.com/labstack/echo/v4"
 	"net/http"
 )

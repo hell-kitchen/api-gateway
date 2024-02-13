@@ -2,16 +2,17 @@ package http
 
 import (
 	"context"
+	"net/http"
+	"time"
+
 	"github.com/google/uuid"
-	"github.com/hell-kitchen/api-gateway/internal/config"
-	"github.com/hell-kitchen/api-gateway/internal/controller/http/mw"
-	"github.com/hell-kitchen/api-gateway/internal/model"
-	"github.com/hell-kitchen/api-gateway/internal/service"
+	"github.com/hell-kitchen/api-gateway/pkg/config"
+	"github.com/hell-kitchen/api-gateway/pkg/controller/http/mw"
+	"github.com/hell-kitchen/api-gateway/pkg/model"
+	"github.com/hell-kitchen/api-gateway/pkg/service"
 	"github.com/labstack/echo/v4"
 	"github.com/labstack/echo/v4/middleware"
 	"go.uber.org/zap"
-	"net/http"
-	"time"
 )
 
 // Server is HTTP server struct. Includes logger, router, service, etc.
@@ -44,6 +45,11 @@ func NewServer(config *config.Server, logger *zap.Logger, srv service.Interface)
 	return s, nil
 }
 
+// OnStart is function which starts http server.
+//
+// It must be called only once on starting of server life cycle.
+//
+// Could be used in fx Hooks.
 func (srv *Server) OnStart(ctx context.Context) error {
 	srv.log.Info("OnStart hook called")
 	ctx, cancel := context.WithCancelCause(ctx)
@@ -59,6 +65,11 @@ func (srv *Server) OnStart(ctx context.Context) error {
 	return ctx.Err()
 }
 
+// OnStop stops server.
+//
+// Must be called only once.
+//
+// May be used in fx Hooks.
 func (srv *Server) OnStop(ctx context.Context) error {
 	srv.log.Info("OnStop hook called")
 	err := srv.router.Shutdown(ctx)
@@ -66,6 +77,9 @@ func (srv *Server) OnStop(ctx context.Context) error {
 	return err
 }
 
+// configureRouter configures echo router.
+//
+// It calls Middleware and Routes configuration functions.
 func (srv *Server) configureRouter() {
 	srv.router.HideBanner = true
 	srv.configureMiddlewares()
@@ -73,6 +87,7 @@ func (srv *Server) configureRouter() {
 	srv.router.HTTPErrorHandler = srv.errorHandler
 }
 
+// errorHandler is custom http errors handler.
 func (srv *Server) errorHandler(err error, c echo.Context) {
 	resp := model.BaseErrorResponse{Detail: err.Error()}
 
@@ -81,6 +96,9 @@ func (srv *Server) errorHandler(err error, c echo.Context) {
 	}
 }
 
+// configureMiddlewares configures Middlewares.
+//
+// Adds CORS, RequestID, Recover middlewares.
 func (srv *Server) configureMiddlewares() {
 	srv.router.Use(
 		mw.LogMiddleware(srv.log),
@@ -90,6 +108,7 @@ func (srv *Server) configureMiddlewares() {
 			Generator:    uuid.NewString,
 			TargetHeader: echo.HeaderXRequestID,
 		}),
+		middleware.Gzip(),
 		middleware.Recover(),
 	)
 }
