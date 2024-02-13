@@ -661,16 +661,16 @@ func easyjson11d1a9baDecodeGithubComHellKitchenApiGatewayInternalModel9(in *jlex
 				in.Delim('[')
 				if out.Tags == nil {
 					if !in.IsDelim(']') {
-						out.Tags = make([]int, 0, 8)
+						out.Tags = make([]string, 0, 4)
 					} else {
-						out.Tags = []int{}
+						out.Tags = []string{}
 					}
 				} else {
 					out.Tags = (out.Tags)[:0]
 				}
 				for !in.IsDelim(']') {
-					var v2 int
-					v2 = int(in.Int())
+					var v2 string
+					v2 = string(in.String())
 					out.Tags = append(out.Tags, v2)
 					in.WantComma()
 				}
@@ -683,7 +683,7 @@ func easyjson11d1a9baDecodeGithubComHellKitchenApiGatewayInternalModel9(in *jlex
 		case "text":
 			out.Text = string(in.String())
 		case "cooking_time":
-			out.CookingTime = int(in.Int())
+			out.CookingTime = int32(in.Int32())
 		default:
 			in.SkipRecursive()
 		}
@@ -730,7 +730,7 @@ func easyjson11d1a9baEncodeGithubComHellKitchenApiGatewayInternalModel9(out *jwr
 				if v5 > 0 {
 					out.RawByte(',')
 				}
-				out.Int(int(v6))
+				out.String(string(v6))
 			}
 			out.RawByte(']')
 		}
@@ -753,7 +753,7 @@ func easyjson11d1a9baEncodeGithubComHellKitchenApiGatewayInternalModel9(out *jwr
 	{
 		const prefix string = ",\"cooking_time\":"
 		out.RawString(prefix)
-		out.Int(int(in.CookingTime))
+		out.Int32(int32(in.CookingTime))
 	}
 	out.RawByte('}')
 }
@@ -1148,7 +1148,7 @@ func easyjson11d1a9baDecodeGithubComHellKitchenApiGatewayInternalModel15(in *jle
 		case "text":
 			out.Text = string(in.String())
 		case "cooking_time":
-			out.CookingTime = int(in.Int())
+			out.CookingTime = uint32(in.Uint32())
 		default:
 			in.SkipRecursive()
 		}
@@ -1213,7 +1213,7 @@ func easyjson11d1a9baEncodeGithubComHellKitchenApiGatewayInternalModel15(out *jw
 	{
 		const prefix string = ",\"cooking_time\":"
 		out.RawString(prefix)
-		out.Int(int(in.CookingTime))
+		out.Uint32(uint32(in.CookingTime))
 	}
 	out.RawByte('}')
 }

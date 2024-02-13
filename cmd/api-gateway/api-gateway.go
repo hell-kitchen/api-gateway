@@ -4,8 +4,8 @@ import (
 	"github.com/hell-kitchen/api-gateway/internal/config"
 	"github.com/hell-kitchen/api-gateway/internal/controller/http"
 	"github.com/hell-kitchen/api-gateway/internal/service/fake"
+	"github.com/hell-kitchen/pkg/logger"
 	"go.uber.org/fx"
-	"go.uber.org/zap"
 )
 
 func main() {
@@ -19,12 +19,13 @@ func NewOptions() fx.Option {
 		fx.Provide(
 			config.NewServer,
 			http.NewServer,
-			zap.NewProduction,
+			logger.NewProduction,
 			fake.New,
 		),
 		fx.Invoke(
 			addServerStartup,
 		),
+		fx.NopLogger,
 	)
 }
 

@@ -3,20 +3,26 @@ package model
 
 type (
 	UsersGetAllResponse struct {
-		Count        int                   `json:"count"`
+		Count        int32                 `json:"count"`
 		NextPage     string                `json:"next"`
 		PreviousPage string                `json:"previous"`
 		Results      []UserInSubscriptions `json:"results"`
 	}
 	UsersGetByIDResponse struct {
-		Email        string `json:"email"`
+		// ID is string.
+		//
+		// It could be any string, but mostly is UUID v4 string.
 		ID           string `json:"id"`
+		Email        string `json:"email"`
 		Username     string `json:"username"`
 		FirstName    string `json:"first_name"`
 		LastName     string `json:"last_name"`
 		IsSubscribed bool   `json:"is_subscribed"`
 	}
 	UsersCreateResponse struct {
+		// ID is string.
+		//
+		// It could be any string, but mostly is UUID v4 string.
 		ID        string `json:"id"`
 		Email     string `json:"email"`
 		Username  string `json:"username"`
@@ -27,8 +33,11 @@ type (
 		Detail string `json:"detail"`
 	}
 	UsersGetMeResponse struct {
-		Email        string `json:"email"`
+		// ID is string.
+		//
+		// It could be any string, but mostly is UUID v4 string.
 		ID           string `json:"id"`
+		Email        string `json:"email"`
 		Username     string `json:"username"`
 		FirstName    string `json:"first_name"`
 		LastName     string `json:"last_name"`
@@ -40,7 +49,7 @@ type (
 	TagsGetManyResponse    []TagDTO
 	TagsGetOneResponse     TagDTO
 	RecipesGetManyResponse struct {
-		Count    int         `json:"count"`
+		Count    int32       `json:"count"`
 		Next     string      `json:"next"`
 		Previous string      `json:"previous"`
 		Results  []RecipeDTO `json:"results"`
@@ -49,25 +58,34 @@ type (
 	RecipesGetOneResponse              RecipeDTO
 	RecipesUpdateOneResponse           RecipeDTO
 	RecipesAddedToShoppingCartResponse struct {
+		// ID is string.
+		//
+		// It could be any string, but mostly is UUID v4 string.
 		ID          string `json:"id"`
 		Name        string `json:"name"`
 		Image       string `json:"image"`
-		CookingTime int    `json:"cooking_time"`
+		CookingTime uint32 `json:"cooking_time"`
 	}
 	RecipesAddedToFavoriteResponse struct {
+		// ID is string.
+		//
+		// It could be any string, but mostly is UUID v4 string.
 		ID          string `json:"id"`
 		Name        string `json:"name"`
 		Image       string `json:"image"`
-		CookingTime int    `json:"cooking_time"`
+		CookingTime uint32 `json:"cooking_time"`
 	}
 	RecipesGetSubscribedResponse struct {
-		Count    int                         `json:"count"`
+		Count    uint32                      `json:"count"`
 		Next     string                      `json:"next"`
 		Previous string                      `json:"previous"`
 		Results  []UserInSubscriptionsResult `json:"results"`
 	}
 	UserSubscribedResponse     UserInSubscriptionsResult
 	IngredientsGetByIDResponse struct {
+		// ID is string.
+		//
+		// It could be any string, but mostly is UUID v4 string.
 		ID              string `json:"id"`
 		Name            string `json:"name"`
 		MeasurementUnit string `json:"measurement_unit"`

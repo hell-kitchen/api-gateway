@@ -43,7 +43,7 @@ func easyjsonAf04a44aDecodeGithubComHellKitchenApiGatewayInternalModel(in *jlexe
 		case "image":
 			out.Image = string(in.String())
 		case "cooking_time":
-			out.CookingTime = int(in.Int())
+			out.CookingTime = uint32(in.Uint32())
 		default:
 			in.SkipRecursive()
 		}
@@ -76,7 +76,7 @@ func easyjsonAf04a44aEncodeGithubComHellKitchenApiGatewayInternalModel(out *jwri
 	{
 		const prefix string = ",\"cooking_time\":"
 		out.RawString(prefix)
-		out.Int(int(in.CookingTime))
+		out.Uint32(uint32(in.CookingTime))
 	}
 	out.RawByte('}')
 }
@@ -142,14 +142,14 @@ func easyjsonAf04a44aDecodeGithubComHellKitchenApiGatewayInternalModel1(in *jlex
 				}
 				for !in.IsDelim(']') {
 					var v1 TagDTO
-					easyjsonAf04a44aDecodeGithubComHellKitchenApiGatewayInternalModel2(in, &v1)
+					(v1).UnmarshalEasyJSON(in)
 					out.Tags = append(out.Tags, v1)
 					in.WantComma()
 				}
 				in.Delim(']')
 			}
 		case "author":
-			easyjsonAf04a44aDecodeGithubComHellKitchenApiGatewayInternalModel3(in, &out.Author)
+			(out.Author).UnmarshalEasyJSON(in)
 		case "ingredients":
 			if in.IsNull() {
 				in.Skip()
@@ -184,7 +184,7 @@ func easyjsonAf04a44aDecodeGithubComHellKitchenApiGatewayInternalModel1(in *jlex
 		case "text":
 			out.Text = string(in.String())
 		case "cooking_time":
-			out.CookingTime = int(in.Int())
+			out.CookingTime = uint32(in.Uint32())
 		default:
 			in.SkipRecursive()
 		}
@@ -215,7 +215,7 @@ func easyjsonAf04a44aEncodeGithubComHellKitchenApiGatewayInternalModel1(out *jwr
 				if v3 > 0 {
 					out.RawByte(',')
 				}
-				easyjsonAf04a44aEncodeGithubComHellKitchenApiGatewayInternalModel2(out, v4)
+				(v4).MarshalEasyJSON(out)
 			}
 			out.RawByte(']')
 		}
@@ -223,7 +223,7 @@ func easyjsonAf04a44aEncodeGithubComHellKitchenApiGatewayInternalModel1(out *jwr
 	{
 		const prefix string = ",\"author\":"
 		out.RawString(prefix)
-		easyjsonAf04a44aEncodeGithubComHellKitchenApiGatewayInternalModel3(out, in.Author)
+		(in.Author).MarshalEasyJSON(out)
 	}
 	{
 		const prefix string = ",\"ingredients\":"
@@ -269,7 +269,7 @@ func easyjsonAf04a44aEncodeGithubComHellKitchenApiGatewayInternalModel1(out *jwr
 	{
 		const prefix string = ",\"cooking_time\":"
 		out.RawString(prefix)
-		out.Int(int(in.CookingTime))
+		out.Uint32(uint32(in.CookingTime))
 	}
 	out.RawByte('}')
 }
@@ -296,144 +296,4 @@ func (v *RecipeDTO) UnmarshalJSON(data []byte) error {
 // UnmarshalEasyJSON supports easyjson.Unmarshaler interface
 func (v *RecipeDTO) UnmarshalEasyJSON(l *jlexer.Lexer) {
 	easyjsonAf04a44aDecodeGithubComHellKitchenApiGatewayInternalModel1(l, v)
-}
-func easyjsonAf04a44aDecodeGithubComHellKitchenApiGatewayInternalModel3(in *jlexer.Lexer, out *UserInRecipe) {
-	isTopLevel := in.IsStart()
-	if in.IsNull() {
-		if isTopLevel {
-			in.Consumed()
-		}
-		in.Skip()
-		return
-	}
-	in.Delim('{')
-	for !in.IsDelim('}') {
-		key := in.UnsafeFieldName(false)
-		in.WantColon()
-		if in.IsNull() {
-			in.Skip()
-			in.WantComma()
-			continue
-		}
-		switch key {
-		case "id":
-			out.ID = string(in.String())
-		case "email":
-			out.Email = string(in.String())
-		case "username":
-			out.Username = string(in.String())
-		case "first_name":
-			out.FirstName = string(in.String())
-		case "last_name":
-			out.LastName = string(in.String())
-		case "is_subscribed":
-			out.IsSubscribed = bool(in.Bool())
-		default:
-			in.SkipRecursive()
-		}
-		in.WantComma()
-	}
-	in.Delim('}')
-	if isTopLevel {
-		in.Consumed()
-	}
-}
-func easyjsonAf04a44aEncodeGithubComHellKitchenApiGatewayInternalModel3(out *jwriter.Writer, in UserInRecipe) {
-	out.RawByte('{')
-	first := true
-	_ = first
-	{
-		const prefix string = ",\"id\":"
-		out.RawString(prefix[1:])
-		out.String(string(in.ID))
-	}
-	{
-		const prefix string = ",\"email\":"
-		out.RawString(prefix)
-		out.String(string(in.Email))
-	}
-	{
-		const prefix string = ",\"username\":"
-		out.RawString(prefix)
-		out.String(string(in.Username))
-	}
-	{
-		const prefix string = ",\"first_name\":"
-		out.RawString(prefix)
-		out.String(string(in.FirstName))
-	}
-	{
-		const prefix string = ",\"last_name\":"
-		out.RawString(prefix)
-		out.String(string(in.LastName))
-	}
-	{
-		const prefix string = ",\"is_subscribed\":"
-		out.RawString(prefix)
-		out.Bool(bool(in.IsSubscribed))
-	}
-	out.RawByte('}')
-}
-func easyjsonAf04a44aDecodeGithubComHellKitchenApiGatewayInternalModel2(in *jlexer.Lexer, out *TagDTO) {
-	isTopLevel := in.IsStart()
-	if in.IsNull() {
-		if isTopLevel {
-			in.Consumed()
-		}
-		in.Skip()
-		return
-	}
-	in.Delim('{')
-	for !in.IsDelim('}') {
-		key := in.UnsafeFieldName(false)
-		in.WantColon()
-		if in.IsNull() {
-			in.Skip()
-			in.WantComma()
-			continue
-		}
-		switch key {
-		case "id":
-			out.ID = string(in.String())
-		case "name":
-			out.Name = string(in.String())
-		case "color":
-			out.Color = string(in.String())
-		case "slug":
-			out.Slug = string(in.String())
-		default:
-			in.SkipRecursive()
-		}
-		in.WantComma()
-	}
-	in.Delim('}')
-	if isTopLevel {
-		in.Consumed()
-	}
-}
-func easyjsonAf04a44aEncodeGithubComHellKitchenApiGatewayInternalModel2(out *jwriter.Writer, in TagDTO) {
-	out.RawByte('{')
-	first := true
-	_ = first
-	{
-		const prefix string = ",\"id\":"
-		out.RawString(prefix[1:])
-		out.String(string(in.ID))
-	}
-	{
-		const prefix string = ",\"name\":"
-		out.RawString(prefix)
-		out.String(string(in.Name))
-	}
-	{
-		const prefix string = ",\"color\":"
-		out.RawString(prefix)
-		out.String(string(in.Color))
-	}
-	{
-		const prefix string = ",\"slug\":"
-		out.RawString(prefix)
-		out.String(string(in.Slug))
-	}
-	out.RawByte('}')
 }

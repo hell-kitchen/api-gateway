@@ -3,8 +3,8 @@ package model
 
 type (
 	UsersGetAllRequest struct {
-		Page  int `json:"-" query:"page"`
-		Limit int `json:"-" query:"limit"`
+		Page  int32 `json:"-" query:"page"`
+		Limit int32 `json:"-" query:"limit"`
 	}
 	UsersCreateRequest struct {
 		Email     string `json:"email"`
@@ -14,6 +14,9 @@ type (
 		Password  string `json:"password"`
 	}
 	UsersGetByIDRequest struct {
+		// ID is string.
+		//
+		// It could be any string, but mostly is UUID v4 string.
 		ID string `json:"-" param:"id"`
 	}
 	UsersSetPasswordRequest struct {
@@ -21,15 +24,21 @@ type (
 		CurrentPassword string `json:"current_password"`
 	}
 	UsersGetSubscriptionsRequest struct {
-		Page         int `json:"-" query:"page"`
-		Limit        int `json:"-" query:"limit"`
-		RecipesLimit int `json:"-" query:"recipes_limit"`
+		Page         int32 `json:"-" query:"page"`
+		Limit        int32 `json:"-" query:"limit"`
+		RecipesLimit int32 `json:"-" query:"recipes_limit"`
 	}
 	UsersSubscribeRequest struct {
+		// ID is string.
+		//
+		// It could be any string, but mostly is UUID v4 string.
 		ID           string `json:"-" param:"id"`
-		RecipesLimit int    `json:"-" query:"recipes_limit"`
+		RecipesLimit int32  `json:"-" query:"recipes_limit"`
 	}
 	UsersUnsubscribeRequest struct {
+		// ID is string.
+		//
+		// It could be any string, but mostly is UUID v4 string.
 		ID string `param:"id" json:"-"`
 	}
 	TokensLoginRequest struct {
@@ -37,16 +46,19 @@ type (
 		Email    string `json:"email"`
 	}
 	TagsGetByIDRequest struct {
+		// ID is string.
+		//
+		// It could be any string, but mostly is UUID v4 string.
 		ID string `param:"id" json:"-"`
 	}
 	// RecipesGetAllRequest godoc.
 	//
 	// TODO: check how to check was value in request or not
 	RecipesGetAllRequest struct {
-		Page             int      `query:"page" json:"-"`
-		Limit            int      `query:"limit" json:"-"`
-		IsFavorited      int      `query:"is_favorited" json:"-"`
-		IsInShoppingCart int      `query:"is_in_shopping_cart" json:"-"`
+		Page             int32    `query:"page" json:"-"`
+		Limit            int32    `query:"limit" json:"-"`
+		IsFavorited      int32    `query:"is_favorited" json:"-"`
+		IsInShoppingCart int32    `query:"is_in_shopping_cart" json:"-"`
 		Author           string   `query:"author" json:"-"`
 		Tags             []string `query:"tags" json:"-"`
 	}
@@ -56,39 +68,63 @@ type (
 		Image       string                          `json:"image"`
 		Name        string                          `json:"name"`
 		Text        string                          `json:"text"`
-		CookingTime int                             `json:"cooking_time"`
+		CookingTime uint32                          `json:"cooking_time"`
 	}
 	RecipesGetByIDRequest struct {
+		// ID is string.
+		//
+		// It could be any string, but mostly is UUID v4 string.
 		ID string `param:"id" json:"-"`
 	}
 	RecipesUpdateByIDRequest struct {
+		// ID is string.
+		//
+		// It could be any string, but mostly is UUID v4 string.
 		ID          string                          `json:"-" param:"id"`
 		Ingredients []IngredientInRecipeCreationDTO `json:"ingredients"`
-		Tags        []int                           `json:"tags"`
+		Tags        []string                        `json:"tags"`
 		Image       string                          `json:"image"`
 		Name        string                          `json:"name"`
 		Text        string                          `json:"text"`
-		CookingTime int                             `json:"cooking_time"`
+		CookingTime int32                           `json:"cooking_time"`
 	}
 	RecipesDeleteByIDRequest struct {
+		// ID is string.
+		//
+		// It could be any string, but mostly is UUID v4 string.
 		ID string `param:"id" json:"-"`
 	}
 	RecipesAddRecipeToShoppingCartRequest struct {
+		// ID is string.
+		//
+		// It could be any string, but mostly is UUID v4 string.
 		ID string `param:"id" json:"-"`
 	}
 	RecipesRemoveRecipeFromShoppingCartRequest struct {
+		// ID is string.
+		//
+		// It could be any string, but mostly is UUID v4 string.
 		ID string `param:"id" json:"-"`
 	}
 	RecipesAddRecipeToFavoriteRequest struct {
+		// ID is string.
+		//
+		// It could be any string, but mostly is UUID v4 string.
 		ID string `param:"id" json:"-"`
 	}
 	RecipesRemoveRecipeFromFavoriteRequest struct {
+		// ID is string.
+		//
+		// It could be any string, but mostly is UUID v4 string.
 		ID string `param:"id" json:"-"`
 	}
 	IngredientsGetAllRequest struct {
 		Name string `json:"-" query:"name"`
 	}
 	IngredientsGetByIDRequest struct {
+		// ID is string.
+		//
+		// It could be any string, but mostly is UUID v4 string.
 		ID string `json:"-" param:"id"`
 	}
 )

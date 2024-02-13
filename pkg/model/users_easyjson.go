@@ -72,7 +72,7 @@ func easyjson84c0690eDecodeGithubComHellKitchenApiGatewayInternalModel(in *jlexe
 				in.Delim(']')
 			}
 		case "recipes_count":
-			out.RecipesCount = int(in.Int())
+			out.RecipesCount = uint32(in.Uint32())
 		default:
 			in.SkipRecursive()
 		}
@@ -136,7 +136,7 @@ func easyjson84c0690eEncodeGithubComHellKitchenApiGatewayInternalModel(out *jwri
 	{
 		const prefix string = ",\"recipes_count\":"
 		out.RawString(prefix)
-		out.Int(int(in.RecipesCount))
+		out.Uint32(uint32(in.RecipesCount))
 	}
 	out.RawByte('}')
 }

@@ -3,8 +3,8 @@ package fake
 import (
 	"context"
 	"github.com/google/uuid"
-	"github.com/hell-kitchen/api-gateway/internal/model"
-	"github.com/hell-kitchen/api-gateway/internal/service"
+	"github.com/hell-kitchen/api-gateway/pkg/model"
+	"github.com/hell-kitchen/api-gateway/pkg/service"
 	"github.com/labstack/gommon/random"
 	"math/rand"
 )
@@ -23,7 +23,7 @@ func newUsers(srv *Service) {
 	}
 }
 
-func (u *usersService) Create(ctx context.Context, request model.UsersCreateRequest) (*model.UsersCreateResponse, error) {
+func (u *usersService) Create(_ context.Context, request model.UsersCreateRequest) (*model.UsersCreateResponse, error) {
 	resp := &model.UsersCreateResponse{
 		ID:        uuid.NewString(),
 		Email:     request.Email,
@@ -46,22 +46,10 @@ func (u *usersService) GetByID(_ context.Context, request model.UsersGetByIDRequ
 	return &resp, nil
 }
 
-func (u *usersService) GetAll(ctx context.Context, request model.UsersGetAllRequest) (*model.UsersGetAllResponse, error) {
+func (u *usersService) GetAll(_ context.Context, _ model.UsersGetAllRequest) (*model.UsersGetAllResponse, error) {
 	count := rand.Int() % 200
-	create := count - request.Page*request.Limit
-	if create < 0 {
-		return &model.UsersGetAllResponse{
-			Count:        count,
-			NextPage:     "",
-			PreviousPage: "",
-			Results:      []model.UserInSubscriptions{},
-		}, nil
-	}
-	if create > request.Limit {
-		create = request.Limit
-	}
 	var resp []model.UserInSubscriptions
-	for i := 0; i != create; i++ {
+	for i := 0; i != count; i++ {
 		resp = append(resp, model.UserInSubscriptions{
 			Email:        random.String(10, random.Alphanumeric, "@"),
 			ID:           uuid.NewString(),
@@ -72,7 +60,7 @@ func (u *usersService) GetAll(ctx context.Context, request model.UsersGetAllRequ
 		})
 	}
 	return &model.UsersGetAllResponse{
-		Count:        count,
+		Count:        int32(count),
 		NextPage:     "",
 		PreviousPage: "",
 		Results:      resp,
@@ -100,13 +88,13 @@ func (u *usersService) GetSubscriptions(_ context.Context, request model.UsersGe
 	for i := 0; i != count; i++ {
 		recipesCount := rand.Int() % 100
 		recipes := make([]model.RecipeInUsersSubscriptions, 0, recipesCount)
-		add := recipesCount % request.RecipesLimit
+		add := recipesCount % int(request.RecipesLimit)
 		for c := 0; c != add; c++ {
 			recipes = append(recipes, model.RecipeInUsersSubscriptions{
 				ID:          uuid.NewString(),
 				Name:        random.String(uint8(rand.Uint32()%20), random.Alphabetic),
 				Image:       random.String(uint8(rand.Uint32()%20), random.Alphanumeric),
-				CookingTime: rand.Int() % 200,
+				CookingTime: uint32(rand.Int()%200) + 1,
 			})
 		}
 		users = append(users, model.UserInSubscriptionsResult{
@@ -117,11 +105,11 @@ func (u *usersService) GetSubscriptions(_ context.Context, request model.UsersGe
 			LastName:     uuid.NewString(),
 			IsSubscribed: rand.Int()%2 == 0,
 			Recipes:      recipes,
-			RecipesCount: count,
+			RecipesCount: uint32(count),
 		})
 	}
 	return &model.RecipesGetSubscribedResponse{
-		Count:    count,
+		Count:    uint32(count),
 		Next:     "",
 		Previous: "",
 		Results:  users,
@@ -129,16 +117,16 @@ func (u *usersService) GetSubscriptions(_ context.Context, request model.UsersGe
 
 }
 
-func (u *usersService) Subscribe(ctx context.Context, request model.UsersSubscribeRequest) (*model.UserSubscribedResponse, error) {
+func (u *usersService) Subscribe(_ context.Context, request model.UsersSubscribeRequest) (*model.UserSubscribedResponse, error) {
 	count := rand.Int() % 100
 	recipes := make([]model.RecipeInUsersSubscriptions, 0, count)
-	add := count % request.RecipesLimit
+	add := count % int(request.RecipesLimit)
 	for i := 0; i != add; i++ {
 		recipes = append(recipes, model.RecipeInUsersSubscriptions{
 			ID:          uuid.NewString(),
 			Name:        random.String(uint8(rand.Uint32()%20), random.Alphabetic),
 			Image:       random.String(uint8(rand.Uint32()%20), random.Alphanumeric),
-			CookingTime: rand.Int() % 200,
+			CookingTime: uint32(rand.Int())%200 + 1,
 		})
 	}
 	return &model.UserSubscribedResponse{
@@ -149,7 +137,7 @@ func (u *usersService) Subscribe(ctx context.Context, request model.UsersSubscri
 		LastName:     uuid.NewString(),
 		IsSubscribed: true,
 		Recipes:      nil,
-		RecipesCount: count,
+		RecipesCount: uint32(count),
 	}, nil
 }
 
