@@ -3,7 +3,7 @@ package service
 import (
 	"context"
 
-	"github.com/hell-kitchen/api-gateway/pkg/model"
+	"github.com/hell-kitchen/api-gateway/internal/model"
 )
 
 type (
@@ -58,7 +58,7 @@ type (
 	TagsService interface {
 		// GetAll returns all tags.
 		GetAll(ctx context.Context) (*model.TagsGetManyResponse, error)
-		// GetAll returns tags by id.
+		// Get returns tags by id.
 		Get(ctx context.Context, request model.TagsGetByIDRequest) (*model.TagsGetOneResponse, error)
 	}
 	TokensService interface {

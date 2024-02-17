@@ -17,7 +17,7 @@ var (
 	_ easyjson.Marshaler
 )
 
-func easyjson2aad9953DecodeGithubComHellKitchenApiGatewayInternalModel(in *jlexer.Lexer, out *TagDTO) {
+func easyjson2aad9953DecodeGithubComHellKitchenApiGatewayPkgModel(in *jlexer.Lexer, out *TagDTO) {
 	isTopLevel := in.IsStart()
 	if in.IsNull() {
 		if isTopLevel {
@@ -54,7 +54,7 @@ func easyjson2aad9953DecodeGithubComHellKitchenApiGatewayInternalModel(in *jlexe
 		in.Consumed()
 	}
 }
-func easyjson2aad9953EncodeGithubComHellKitchenApiGatewayInternalModel(out *jwriter.Writer, in TagDTO) {
+func easyjson2aad9953EncodeGithubComHellKitchenApiGatewayPkgModel(out *jwriter.Writer, in TagDTO) {
 	out.RawByte('{')
 	first := true
 	_ = first
@@ -84,23 +84,23 @@ func easyjson2aad9953EncodeGithubComHellKitchenApiGatewayInternalModel(out *jwri
 // MarshalJSON supports json.Marshaler interface
 func (v TagDTO) MarshalJSON() ([]byte, error) {
 	w := jwriter.Writer{}
-	easyjson2aad9953EncodeGithubComHellKitchenApiGatewayInternalModel(&w, v)
+	easyjson2aad9953EncodeGithubComHellKitchenApiGatewayPkgModel(&w, v)
 	return w.Buffer.BuildBytes(), w.Error
 }
 
 // MarshalEasyJSON supports easyjson.Marshaler interface
 func (v TagDTO) MarshalEasyJSON(w *jwriter.Writer) {
-	easyjson2aad9953EncodeGithubComHellKitchenApiGatewayInternalModel(w, v)
+	easyjson2aad9953EncodeGithubComHellKitchenApiGatewayPkgModel(w, v)
 }
 
 // UnmarshalJSON supports json.Unmarshaler interface
 func (v *TagDTO) UnmarshalJSON(data []byte) error {
 	r := jlexer.Lexer{Data: data}
-	easyjson2aad9953DecodeGithubComHellKitchenApiGatewayInternalModel(&r, v)
+	easyjson2aad9953DecodeGithubComHellKitchenApiGatewayPkgModel(&r, v)
 	return r.Error()
 }
 
 // UnmarshalEasyJSON supports easyjson.Unmarshaler interface
 func (v *TagDTO) UnmarshalEasyJSON(l *jlexer.Lexer) {
-	easyjson2aad9953DecodeGithubComHellKitchenApiGatewayInternalModel(l, v)
+	easyjson2aad9953DecodeGithubComHellKitchenApiGatewayPkgModel(l, v)
 }

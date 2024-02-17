@@ -17,7 +17,7 @@ var (
 	_ easyjson.Marshaler
 )
 
-func easyjsonC156496aDecodeGithubComHellKitchenApiGatewayInternalModel(in *jlexer.Lexer, out *IngredientInRecipeDTO) {
+func easyjsonC156496aDecodeGithubComHellKitchenApiGatewayPkgModel(in *jlexer.Lexer, out *IngredientInRecipeDTO) {
 	isTopLevel := in.IsStart()
 	if in.IsNull() {
 		if isTopLevel {
@@ -54,7 +54,7 @@ func easyjsonC156496aDecodeGithubComHellKitchenApiGatewayInternalModel(in *jlexe
 		in.Consumed()
 	}
 }
-func easyjsonC156496aEncodeGithubComHellKitchenApiGatewayInternalModel(out *jwriter.Writer, in IngredientInRecipeDTO) {
+func easyjsonC156496aEncodeGithubComHellKitchenApiGatewayPkgModel(out *jwriter.Writer, in IngredientInRecipeDTO) {
 	out.RawByte('{')
 	first := true
 	_ = first
@@ -84,27 +84,27 @@ func easyjsonC156496aEncodeGithubComHellKitchenApiGatewayInternalModel(out *jwri
 // MarshalJSON supports json.Marshaler interface
 func (v IngredientInRecipeDTO) MarshalJSON() ([]byte, error) {
 	w := jwriter.Writer{}
-	easyjsonC156496aEncodeGithubComHellKitchenApiGatewayInternalModel(&w, v)
+	easyjsonC156496aEncodeGithubComHellKitchenApiGatewayPkgModel(&w, v)
 	return w.Buffer.BuildBytes(), w.Error
 }
 
 // MarshalEasyJSON supports easyjson.Marshaler interface
 func (v IngredientInRecipeDTO) MarshalEasyJSON(w *jwriter.Writer) {
-	easyjsonC156496aEncodeGithubComHellKitchenApiGatewayInternalModel(w, v)
+	easyjsonC156496aEncodeGithubComHellKitchenApiGatewayPkgModel(w, v)
 }
 
 // UnmarshalJSON supports json.Unmarshaler interface
 func (v *IngredientInRecipeDTO) UnmarshalJSON(data []byte) error {
 	r := jlexer.Lexer{Data: data}
-	easyjsonC156496aDecodeGithubComHellKitchenApiGatewayInternalModel(&r, v)
+	easyjsonC156496aDecodeGithubComHellKitchenApiGatewayPkgModel(&r, v)
 	return r.Error()
 }
 
 // UnmarshalEasyJSON supports easyjson.Unmarshaler interface
 func (v *IngredientInRecipeDTO) UnmarshalEasyJSON(l *jlexer.Lexer) {
-	easyjsonC156496aDecodeGithubComHellKitchenApiGatewayInternalModel(l, v)
+	easyjsonC156496aDecodeGithubComHellKitchenApiGatewayPkgModel(l, v)
 }
-func easyjsonC156496aDecodeGithubComHellKitchenApiGatewayInternalModel1(in *jlexer.Lexer, out *IngredientInRecipeCreationDTO) {
+func easyjsonC156496aDecodeGithubComHellKitchenApiGatewayPkgModel1(in *jlexer.Lexer, out *IngredientInRecipeCreationDTO) {
 	isTopLevel := in.IsStart()
 	if in.IsNull() {
 		if isTopLevel {
@@ -137,7 +137,7 @@ func easyjsonC156496aDecodeGithubComHellKitchenApiGatewayInternalModel1(in *jlex
 		in.Consumed()
 	}
 }
-func easyjsonC156496aEncodeGithubComHellKitchenApiGatewayInternalModel1(out *jwriter.Writer, in IngredientInRecipeCreationDTO) {
+func easyjsonC156496aEncodeGithubComHellKitchenApiGatewayPkgModel1(out *jwriter.Writer, in IngredientInRecipeCreationDTO) {
 	out.RawByte('{')
 	first := true
 	_ = first
@@ -157,23 +157,23 @@ func easyjsonC156496aEncodeGithubComHellKitchenApiGatewayInternalModel1(out *jwr
 // MarshalJSON supports json.Marshaler interface
 func (v IngredientInRecipeCreationDTO) MarshalJSON() ([]byte, error) {
 	w := jwriter.Writer{}
-	easyjsonC156496aEncodeGithubComHellKitchenApiGatewayInternalModel1(&w, v)
+	easyjsonC156496aEncodeGithubComHellKitchenApiGatewayPkgModel1(&w, v)
 	return w.Buffer.BuildBytes(), w.Error
 }
 
 // MarshalEasyJSON supports easyjson.Marshaler interface
 func (v IngredientInRecipeCreationDTO) MarshalEasyJSON(w *jwriter.Writer) {
-	easyjsonC156496aEncodeGithubComHellKitchenApiGatewayInternalModel1(w, v)
+	easyjsonC156496aEncodeGithubComHellKitchenApiGatewayPkgModel1(w, v)
 }
 
 // UnmarshalJSON supports json.Unmarshaler interface
 func (v *IngredientInRecipeCreationDTO) UnmarshalJSON(data []byte) error {
 	r := jlexer.Lexer{Data: data}
-	easyjsonC156496aDecodeGithubComHellKitchenApiGatewayInternalModel1(&r, v)
+	easyjsonC156496aDecodeGithubComHellKitchenApiGatewayPkgModel1(&r, v)
 	return r.Error()
 }
 
 // UnmarshalEasyJSON supports easyjson.Unmarshaler interface
 func (v *IngredientInRecipeCreationDTO) UnmarshalEasyJSON(l *jlexer.Lexer) {
-	easyjsonC156496aDecodeGithubComHellKitchenApiGatewayInternalModel1(l, v)
+	easyjsonC156496aDecodeGithubComHellKitchenApiGatewayPkgModel1(l, v)
 }

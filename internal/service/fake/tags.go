@@ -3,8 +3,8 @@ package fake
 import (
 	"context"
 	"github.com/google/uuid"
-	"github.com/hell-kitchen/api-gateway/pkg/model"
-	"github.com/hell-kitchen/api-gateway/pkg/service"
+	"github.com/hell-kitchen/api-gateway/internal/model"
+	"github.com/hell-kitchen/api-gateway/internal/service"
 	"github.com/labstack/gommon/random"
 	"math/rand"
 )
