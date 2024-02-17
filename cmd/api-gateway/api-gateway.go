@@ -18,6 +18,7 @@ func NewOptions() fx.Option {
 	return fx.Options(
 		fx.Provide(
 			config.NewServer,
+			config.NewTags,
 			http.NewServer,
 			logger.NewProduction,
 			fake.New,
