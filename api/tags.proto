@@ -1,0 +1,43 @@
+syntax = "proto3";
+
+package tags;
+
+option go_package = "pkg/api/proto/tags";
+
+service TagsService {
+  rpc Create(TagsCreateRequest) returns (TagsCreateResponse) {}
+  rpc Get(TagsGetRequest) returns (TagsGetResponse) {}
+  rpc GetAll(TagsGetAllRequest) returns (TagsGetAllResponse) {}
+}
+
+message Tag {
+  string id = 1;
+  string name = 2;
+  string color = 3;
+  string slug = 4;
+}
+
+message TagsGetRequest {
+  string id = 1;
+}
+message TagsGetResponse {
+  Tag tag = 1;
+}
+
+message TagsGetAllRequest {
+}
+message TagsGetAllResponse {
+  repeated Tag tag = 1;
+}
+
+message TagsCreateRequest {
+  string name = 1;
+  string color = 2;
+  string slug = 3;
+}
+message TagsCreateResponse {
+  string id = 1;
+  string name = 2;
+  string color = 3;
+  string slug = 4;
+}
