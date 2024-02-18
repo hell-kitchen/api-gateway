@@ -5,9 +5,12 @@ package tags;
 option go_package = "pkg/api/proto/tags";
 
 service TagsService {
-  rpc Create(TagsCreateRequest) returns (TagsCreateResponse) {}
-  rpc Get(TagsGetRequest) returns (TagsGetResponse) {}
-  rpc GetAll(TagsGetAllRequest) returns (TagsGetAllResponse) {}
+  rpc Create(CreateRequest) returns (CreateResponse) {}
+  rpc CreateMany(CreateManyRequest) returns (CreateManyResponse) {}
+  rpc Get(GetRequest) returns (GetResponse) {}
+  rpc GetAll(GetAllRequest) returns (GetAllResponse) {}
+  rpc Delete(DeleteRequest) returns (DeleteResponse) {}
+  rpc Update(UpdateRequest) returns (UpdateResponse) {}
 }
 
 message Tag {
@@ -16,26 +19,59 @@ message Tag {
   string color = 3;
   string slug = 4;
 }
-
-message TagsGetRequest {
-  string id = 1;
-}
-message TagsGetResponse {
-  Tag tag = 1;
-}
-
-message TagsGetAllRequest {
-}
-message TagsGetAllResponse {
-  repeated Tag tag = 1;
-}
-
-message TagsCreateRequest {
+message TagCreation {
   string name = 1;
   string color = 2;
   string slug = 3;
 }
-message TagsCreateResponse {
+
+message GetRequest {
+  string id = 1;
+}
+message GetResponse {
+  Tag tag = 1;
+}
+
+message GetAllRequest {
+}
+message GetAllResponse {
+  repeated Tag tag = 1;
+}
+
+message CreateRequest {
+  string name = 1;
+  string color = 2;
+  string slug = 3;
+}
+message CreateResponse {
+  string id = 1;
+  string name = 2;
+  string color = 3;
+  string slug = 4;
+}
+
+
+
+message CreateManyRequest {
+  repeated TagCreation tags = 1;
+}
+message CreateManyResponse {
+  repeated Tag tags = 1;
+}
+
+message DeleteRequest {
+  string id = 1;
+}
+message DeleteResponse {
+}
+
+message UpdateRequest {
+  string id = 1;
+  optional string name = 2;
+  optional string color = 3;
+  optional string slug = 4;
+}
+message UpdateResponse {
   string id = 1;
   string name = 2;
   string color = 3;
