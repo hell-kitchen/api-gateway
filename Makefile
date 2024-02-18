@@ -4,11 +4,14 @@
 build:
 	go build -o api-gateway.o ./cmd/api-gateway/api-gateway.go
 
-.PHONY: gen
-gen:
+.PHONY: gen/proto
+gen/proto:
 	protoc --go_out=. --go_opt=paths=import \
               --go-grpc_out=. --go-grpc_opt=paths=import \
               ./api/tags.proto
+
+.PHONY: gen
+gen: gen/proto
 	go generate ./...
 
 .PHONY: test
