@@ -14,13 +14,11 @@ var (
 )
 
 type usersService struct {
-	service *Service
+	service service.Interface
 }
 
-func newUsers(srv *Service) {
-	srv.users = &usersService{
-		service: srv,
-	}
+func NewUsers(srv service.Interface) {
+	srv.ApplyUsers(&usersService{srv})
 }
 
 func (u *usersService) Create(_ context.Context, request model.UsersCreateRequest) (*model.UsersCreateResponse, error) {

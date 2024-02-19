@@ -14,13 +14,11 @@ var (
 )
 
 type tagsService struct {
-	service *Service
+	service service.Interface
 }
 
-func newTags(srv *Service) {
-	srv.tags = &tagsService{
-		service: srv,
-	}
+func NewTags(srv *Service) {
+	srv.ApplyTags(&tagsService{srv})
 }
 
 func (t *tagsService) GetAll(_ context.Context) (*model.TagsGetManyResponse, error) {

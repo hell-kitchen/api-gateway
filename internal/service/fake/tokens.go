@@ -12,13 +12,11 @@ var (
 )
 
 type tokensService struct {
-	service *Service
+	service service.Interface
 }
 
-func newTokens(srv *Service) {
-	srv.tokens = &tokensService{
-		service: srv,
-	}
+func NewTokens(srv service.Interface) {
+	srv.ApplyTokens(&tokensService{srv})
 }
 
 func (t *tokensService) Login(context.Context, model.TokensLoginRequest) (*model.TokensLoginResponse, error) {

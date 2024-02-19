@@ -78,5 +78,10 @@ type (
 		Tokens() TokensService
 		// Tags is accessor to TagsService
 		Tags() TagsService
+		ApplyIngredients(service IngredientsService)
+		ApplyRecipes(service RecipesService)
+		ApplyTags(service TagsService)
+		ApplyTokens(service TokensService)
+		ApplyUsers(service UsersService)
 	}
 )

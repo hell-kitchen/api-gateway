@@ -14,14 +14,12 @@ var (
 	_ service.RecipesService = (*recipesService)(nil)
 )
 
-func newRecipes(srv *Service) {
-	srv.recipes = &recipesService{
-		service: srv,
-	}
+func NewRecipes(srv service.Interface) {
+	srv.ApplyRecipes(&recipesService{service: srv})
 }
 
 type recipesService struct {
-	service *Service
+	service service.Interface
 }
 
 func (r *recipesService) Create(ctx context.Context, request model.RecipesCreateRequest) (*model.RecipesCreateResponse, error) {

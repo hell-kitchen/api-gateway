@@ -16,10 +16,8 @@ type ingredientsService struct {
 	service *Service
 }
 
-func newIngredients(srv *Service) {
-	srv.ingredients = &ingredientsService{
-		service: srv,
-	}
+func NewIngredients(srv *Service) {
+	srv.ApplyIngredients(&ingredientsService{service: srv})
 }
 
 func (srv *ingredientsService) GetAll(ctx context.Context, request model.IngredientsGetAllRequest) (*model.IngredientsGetManyResponse, error) {

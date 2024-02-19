@@ -5,23 +5,20 @@ import "github.com/hell-kitchen/api-gateway/internal/service"
 var _ service.Interface = (*Service)(nil)
 
 type Service struct {
-	recipes     *recipesService
-	ingredients *ingredientsService
-	users       *usersService
-	tokens      *tokensService
-	tags        *tagsService
+	recipes     service.RecipesService
+	ingredients service.IngredientsService
+	users       service.UsersService
+	tokens      service.TokensService
+	tags        service.TagsService
 }
 
 func New() (service.Interface, error) {
 	s := &Service{}
-	newRecipes(s)
-	newIngredients(s)
-	newUsers(s)
-	newTokens(s)
-	newTags(s)
-	newTags(s)
-	newTags(s)
-	newTags(s)
+	NewRecipes(s)
+	NewIngredients(s)
+	NewUsers(s)
+	NewTokens(s)
+	NewTags(s)
 	return s, nil
 }
 
@@ -43,4 +40,24 @@ func (s *Service) Tokens() service.TokensService {
 
 func (s *Service) Tags() service.TagsService {
 	return s.tags
+}
+
+func (s *Service) ApplyRecipes(srv service.RecipesService) {
+	s.recipes = srv
+}
+
+func (s *Service) ApplyIngredients(srv service.IngredientsService) {
+	s.ingredients = srv
+}
+
+func (s *Service) ApplyUsers(srv service.UsersService) {
+	s.users = srv
+}
+
+func (s *Service) ApplyTokens(srv service.TokensService) {
+	s.tokens = srv
+}
+
+func (s *Service) ApplyTags(srv service.TagsService) {
+	s.tags = srv
 }
