@@ -6,7 +6,7 @@ import (
 )
 
 type Tags struct {
-	Addr     string `json:"tags-addr"`
+	Addr     string `config:"tags-addr"`
 	UseTLS   bool   `config:"use-tls"`
 	CertFile string `config:"cert-file"`
 	KeyFile  string `config:"key-file"`

@@ -40,6 +40,7 @@ func NewOptions() fx.Option {
 
 			addServerStartup,
 		),
+		fx.NopLogger,
 		//fx.WithLogger(func(log *zap.Logger) fxevent.Logger {
 		//	return &fxevent.ZapLogger{Logger: log}
 		//}),
@@ -50,13 +51,15 @@ func applyTagsService(srv service.Interface, tag *tagsService.Service) {
 	srv.ApplyTags(tag)
 }
 
-func createTagsClient(lc fx.Lifecycle, cfg *config.Tags) (res pb.TagsServiceClient, err error) {
+func createTagsClient(lc fx.Lifecycle, log *zap.Logger, cfg *config.Tags) (res pb.TagsServiceClient, err error) {
 	var cli *tags.Client
 
 	cli, err = tags.New(cfg)
 	if err != nil {
 		return
 	}
+	resp, err := cli.GetAll(context.Background(), &pb.GetAllRequest{})
+	log.Info("got request", zap.Any("cfg", cfg), zap.Any("response-tags", resp.GetTags()), zap.Error(err))
 
 	lc.Append(fx.Hook{
 		OnStart: func(ctx context.Context) error {

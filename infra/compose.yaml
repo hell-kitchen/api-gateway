@@ -3,7 +3,7 @@ services:
     image: vladmarlo/hell_kitchen_gateway:latest
     environment:
       - BIND_PORT=8000
-      - TAGS_ADDR=grpc://tags:5000
+      - TAGS_ADDR=tags:5000
       - USE_TLS=false
     restart: always
     depends_on:
@@ -11,6 +11,7 @@ services:
   tags:
     image: vladmarlo/tags_backend:latest
     environment:
+      - BIND_HOST=0.0.0.0
       - POSTGRES_HOST=tags_db
       - POSTGRES_PORT=5432
       - POSTGRES_USER=postgres
