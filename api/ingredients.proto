@@ -1,10 +1,10 @@
 syntax = "proto3";
 
-package tags;
+package ingredients;
 
-option go_package = "pkg/api/proto/tags";
+option go_package = "pkg/api/proto/ingredients";
 
-service TagsService {
+service IngredientService {
   rpc Create(CreateRequest) returns (CreateResponse) {}
   rpc CreateMany(CreateManyRequest) returns (CreateManyResponse) {}
   rpc Get(GetRequest) returns (GetResponse) {}
@@ -13,48 +13,39 @@ service TagsService {
   rpc Update(UpdateRequest) returns (UpdateResponse) {}
 }
 
-message Tag {
+message Ingredient {
   string id = 1;
   string name = 2;
-  string color = 3;
-  string slug = 4;
-}
-message TagCreation {
-  string name = 1;
-  string color = 2;
-  string slug = 3;
+  string measurement_unit = 3;
 }
 
 message GetRequest {
   string id = 1;
 }
 message GetResponse {
-  Tag tag = 1;
+  Ingredient ingredient = 1;
 }
 
 message GetAllRequest {
+  string name = 1;
 }
 message GetAllResponse {
-  repeated Tag tag = 1;
+  repeated Ingredient ingredients = 1;
 }
 
 message CreateRequest {
   string name = 1;
-  string color = 2;
-  string slug = 3;
+  string measurement_unit = 2;
 }
 message CreateResponse {
-  string id = 1;
-  string name = 2;
-  string color = 3;
-  string slug = 4;
+  Ingredient created = 1;
 }
 
 message CreateManyRequest {
-  repeated TagCreation tags = 1;
+  repeated CreateRequest ingredients = 1;
 }
 message CreateManyResponse {
-  repeated Tag tags = 1;
+  repeated Ingredient ingredients = 1;
 }
 
 message DeleteRequest {
@@ -66,12 +57,8 @@ message DeleteResponse {
 message UpdateRequest {
   string id = 1;
   optional string name = 2;
-  optional string color = 3;
-  optional string slug = 4;
+  optional string measurement_unit = 3;
 }
 message UpdateResponse {
-  string id = 1;
-  string name = 2;
-  string color = 3;
-  string slug = 4;
+  Ingredient ingredient = 1;
 }
