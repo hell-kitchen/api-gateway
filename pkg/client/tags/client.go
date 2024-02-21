@@ -48,6 +48,10 @@ func (cli *Client) createConnection() (err error) {
 		opts = []grpc.DialOption{
 			grpc.WithTransportCredentials(transportCredentials),
 		}
+	} else {
+		opts = []grpc.DialOption{
+			grpc.WithInsecure(),
+		}
 	}
 	cli.conn, err = grpc.Dial(cli.cfg.Addr, opts...)
 	return err

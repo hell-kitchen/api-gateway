@@ -13,10 +13,10 @@ var (
 )
 
 type ingredientsService struct {
-	service *Service
+	service service.Interface
 }
 
-func NewIngredients(srv *Service) {
+func NewIngredients(srv service.Interface) {
 	srv.ApplyIngredients(&ingredientsService{service: srv})
 }
 
