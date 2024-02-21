@@ -35,7 +35,7 @@ message GetResponse {
 message GetAllRequest {
 }
 message GetAllResponse {
-  repeated Tag tag = 1;
+  repeated Tag tags = 1;
 }
 
 message CreateRequest {

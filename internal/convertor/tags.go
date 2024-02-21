@@ -15,9 +15,12 @@ func FromProtobufTag(proto *pb.Tag) model.TagDTO {
 }
 
 func FromProtobufTagsGetAllResponse(proto *pb.GetAllResponse) []model.TagDTO {
-	var res = make([]model.TagDTO, 0, len(proto.GetTag()))
-	for _, tag := range proto.GetTag() {
+	tags := proto.GetTags()
+
+	var res = make([]model.TagDTO, 0, len(tags))
+	for _, tag := range tags {
 		res = append(res, FromProtobufTag(tag))
 	}
+
 	return res
 }
