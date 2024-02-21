@@ -36,7 +36,7 @@ lines:
 
 .PHONY: dock
 dock:
-	docker build . --tag="vladmarlo/hell_kitchen_gateway:latest"
+	docker build -f infra/server.dockerfile . --tag="vladmarlo/hell_kitchen_gateway:latest"
 
 .PHONY: dock/push
 dock/push:
