@@ -2,7 +2,7 @@
 
 .PHONY: build
 build:
-	go build -o api-gateway.o ./cmd/api-gateway/api-gateway.go
+	go build -o api-gateway.o ./cmd/api-gateway
 
 .PHONY: gen/proto
 gen/proto:
@@ -36,10 +36,12 @@ lines:
 .PHONY: dock
 dock:
 	docker build -f infra/server.dockerfile . --tag="vladmarlo/hell_kitchen_gateway:latest"
+	docker build -f infra/ingredients.dockerfile . --tag="vladmarlo/hell_kitchen_ingredients_creator:latest"
 
 .PHONY: dock/push
 dock/push:
 	docker push vladmarlo/hell_kitchen_gateway:latest
+	docker push vladmarlo/hell_kitchen_ingredients_creator:latest
 
 .PHONY: dock/run
 dock/run:
