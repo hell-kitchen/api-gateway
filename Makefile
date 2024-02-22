@@ -10,7 +10,6 @@ gen/proto:
               --go-grpc_out=. --go-grpc_opt=paths=import \
               ./api/*.proto
 
-
 .PHONY: gen
 gen: gen/proto
 	go generate ./...
@@ -41,3 +40,7 @@ dock:
 .PHONY: dock/push
 dock/push:
 	docker push vladmarlo/hell_kitchen_gateway:latest
+
+.PHONY: dock/run
+dock/run:
+	docker compose -f infra/compose.yaml up -d
