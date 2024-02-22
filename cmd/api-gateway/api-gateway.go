@@ -3,7 +3,10 @@ package main
 import (
 	"github.com/hell-kitchen/api-gateway/internal/config"
 	"github.com/hell-kitchen/api-gateway/internal/controller/http"
+	"github.com/hell-kitchen/api-gateway/internal/service"
 	"github.com/hell-kitchen/api-gateway/internal/service/fake"
+	ingredientsService "github.com/hell-kitchen/api-gateway/internal/service/production/ingredients"
+	tagsService "github.com/hell-kitchen/api-gateway/internal/service/production/tags"
 	"github.com/hell-kitchen/pkg/logger"
 	"go.uber.org/fx"
 )
@@ -18,15 +21,36 @@ func NewOptions() fx.Option {
 	return fx.Options(
 		fx.Provide(
 			config.NewServer,
+			config.NewTags,
+			config.NewIngredients,
 			http.NewServer,
 			logger.NewProduction,
-			fake.New,
+			tagsService.New,
+			ingredientsService.New,
+			createTagsClient,
+			createIngredientsClient,
+			fx.Annotate(service.New, fx.As(new(service.Interface))),
 		),
 		fx.Invoke(
+			fake.NewRecipes,
+			fake.NewTokens,
+			fake.NewUsers,
+
+			applyTagsService,
+			applyIngredientService,
+
 			addServerStartup,
 		),
 		fx.NopLogger,
 	)
+}
+
+func applyTagsService(srv service.Interface, tag *tagsService.Service) {
+	srv.ApplyTags(tag)
+}
+
+func applyIngredientService(srv service.Interface, ingredients *ingredientsService.Service) {
+	srv.ApplyIngredients(ingredients)
 }
 
 func addServerStartup(lc fx.Lifecycle, server *http.Server) {

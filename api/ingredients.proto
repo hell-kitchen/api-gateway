@@ -1,0 +1,64 @@
+syntax = "proto3";
+
+package ingredients;
+
+option go_package = "pkg/api/proto/ingredients";
+
+service IngredientService {
+  rpc Create(CreateRequest) returns (CreateResponse) {}
+  rpc CreateMany(CreateManyRequest) returns (CreateManyResponse) {}
+  rpc Get(GetRequest) returns (GetResponse) {}
+  rpc GetAll(GetAllRequest) returns (GetAllResponse) {}
+  rpc Delete(DeleteRequest) returns (DeleteResponse) {}
+  rpc Update(UpdateRequest) returns (UpdateResponse) {}
+}
+
+message Ingredient {
+  string id = 1;
+  string name = 2;
+  string measurement_unit = 3;
+}
+
+message GetRequest {
+  string id = 1;
+}
+message GetResponse {
+  Ingredient ingredient = 1;
+}
+
+message GetAllRequest {
+  string name = 1;
+}
+message GetAllResponse {
+  repeated Ingredient ingredients = 1;
+}
+
+message CreateRequest {
+  string name = 1;
+  string measurement_unit = 2;
+}
+message CreateResponse {
+  Ingredient created = 1;
+}
+
+message CreateManyRequest {
+  repeated CreateRequest ingredients = 1;
+}
+message CreateManyResponse {
+  repeated Ingredient ingredients = 1;
+}
+
+message DeleteRequest {
+  string id = 1;
+}
+message DeleteResponse {
+}
+
+message UpdateRequest {
+  string id = 1;
+  optional string name = 2;
+  optional string measurement_unit = 3;
+}
+message UpdateResponse {
+  Ingredient ingredient = 1;
+}

@@ -2,10 +2,16 @@
 
 .PHONY: build
 build:
-	go build -o api-gateway.o ./cmd/api-gateway/api-gateway.go
+	go build -o api-gateway.o ./cmd/api-gateway
+
+.PHONY: gen/proto
+gen/proto:
+	protoc --go_out=. --go_opt=paths=import \
+              --go-grpc_out=. --go-grpc_opt=paths=import \
+              ./api/*.proto
 
 .PHONY: gen
-gen:
+gen: gen/proto
 	go generate ./...
 
 .PHONY: test
@@ -29,8 +35,14 @@ lines:
 
 .PHONY: dock
 dock:
-	docker build . --tag="vladmarlo/hell_kitchen_gateway:latest"
+	docker build -f infra/server.dockerfile . --tag="vladmarlo/hell_kitchen_gateway:latest"
+	docker build -f infra/ingredients.dockerfile . --tag="vladmarlo/hell_kitchen_ingredients_creator:latest"
 
 .PHONY: dock/push
 dock/push:
 	docker push vladmarlo/hell_kitchen_gateway:latest
+	docker push vladmarlo/hell_kitchen_ingredients_creator:latest
+
+.PHONY: dock/run
+dock/run:
+	docker compose -f infra/compose.yaml up -d
