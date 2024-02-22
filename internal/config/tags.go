@@ -7,9 +7,9 @@ import (
 
 type Tags struct {
 	Addr     string `config:"tags-addr"`
-	UseTLS   bool   `config:"use-tls"`
-	CertFile string `config:"cert-file"`
-	KeyFile  string `config:"key-file"`
+	UseTLS   bool   `config:"tags-use-tls"`
+	CertFile string `config:"tags-cert-file"`
+	KeyFile  string `config:"tags-key-file"`
 }
 
 func NewTags() (*Tags, error) {
