@@ -17,6 +17,7 @@ func main() {
 	).Run()
 }
 
+// NewOptions creates options to build and run main application.
 func NewOptions() fx.Option {
 	return fx.Options(
 		fx.Provide(
@@ -45,14 +46,21 @@ func NewOptions() fx.Option {
 	)
 }
 
+// applyTagsService applies tag service to base service.
+//
+// Use it only in Invoke of fx if you want use tag service as main tags service.
 func applyTagsService(srv service.Interface, tag *tagsService.Service) {
 	srv.ApplyTags(tag)
 }
 
+// applyIngredientService applies ingredients service to base service.
+//
+// Use it only in Invoke of fx if you want use ingredients service as main ingredients service.
 func applyIngredientService(srv service.Interface, ingredients *ingredientsService.Service) {
 	srv.ApplyIngredients(ingredients)
 }
 
+// addServerStartup starts http server and adds neccessary calls on start and stop.
 func addServerStartup(lc fx.Lifecycle, server *http.Server) {
 	lc.Append(fx.Hook{
 		OnStart: server.OnStart,

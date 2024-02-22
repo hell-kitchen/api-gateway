@@ -2,6 +2,7 @@ package main
 
 import (
 	"context"
+
 	"github.com/hell-kitchen/api-gateway/internal/config"
 	tagsPB "github.com/hell-kitchen/api-gateway/pkg/api/proto/tags"
 	"github.com/hell-kitchen/api-gateway/pkg/client/tags"
@@ -9,6 +10,9 @@ import (
 	"go.uber.org/zap"
 )
 
+// createTagsClient creates tags service client.
+//
+// After initializing it calls GetAll method to check connection etc.
 func createTagsClient(lc fx.Lifecycle, log *zap.Logger, cfg *config.Tags) (res tagsPB.TagsServiceClient, err error) {
 	var cli *tags.Client
 

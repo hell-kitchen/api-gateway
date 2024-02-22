@@ -2,6 +2,7 @@ package main
 
 import (
 	"context"
+
 	"github.com/hell-kitchen/api-gateway/internal/config"
 	pb "github.com/hell-kitchen/api-gateway/pkg/api/proto/ingredients"
 	"github.com/hell-kitchen/api-gateway/pkg/client/ingredients"
@@ -9,6 +10,9 @@ import (
 	"go.uber.org/zap"
 )
 
+// createIngredientsClient creates ingredients client.
+//
+// After initializing it calls get all method.
 func createIngredientsClient(lc fx.Lifecycle, log *zap.Logger, cfg *config.Ingredients) (res pb.IngredientServiceClient, err error) {
 	var cli *ingredients.Client
 	var resp *pb.GetAllResponse
