@@ -9,6 +9,8 @@ services:
     restart: always
     depends_on:
       - tags
+      - ingredients
+      - ingredients_creator
   tags:
     image: vladmarlo/tags_backend:latest
     environment:
@@ -38,6 +40,12 @@ services:
     depends_on:
       database:
         condition: service_healthy
+  ingredients_creator:
+    image: vladmarlo/hell_kitchen_ingredients_creator:latest
+    environment:
+      - INGREDIENTS_ADDR=ingredients:5000
+    depends_on:
+      - ingredients
   ingredients:
     image: vladmarlo/hell_kitchen_ingredients:latest
     environment:
