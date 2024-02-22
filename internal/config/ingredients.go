@@ -7,9 +7,9 @@ import (
 
 type Ingredients struct {
 	Addr     string `config:"ingredients-addr"`
-	UseTLS   bool   `config:"use-tls"`
-	CertFile string `config:"cert-file"`
-	KeyFile  string `config:"key-file"`
+	UseTLS   bool   `config:"ingredients-use-tls"`
+	CertFile string `config:"ingredients-cert-file"`
+	KeyFile  string `config:"ingredients-key-file"`
 }
 
 func NewIngredients() (*Ingredients, error) {
