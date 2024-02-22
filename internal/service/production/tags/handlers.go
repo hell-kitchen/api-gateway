@@ -13,7 +13,7 @@ func (cli *Service) GetAll(ctx context.Context) (*model.TagsGetManyResponse, err
 		return nil, err
 	}
 
-	tags := convertor.FromProtobufTagsGetAllResponse(protoResponse)
+	tags := convertor.Tag().ProtoAllResponseToDTOs(protoResponse)
 	res := model.TagsGetManyResponse(tags)
 
 	return &res, nil
@@ -24,6 +24,6 @@ func (cli *Service) Get(ctx context.Context, request model.TagsGetByIDRequest) (
 	if err != nil {
 		return nil, err
 	}
-	tag := convertor.FromProtobufTag(protoResult.GetTag())
+	tag := convertor.Tag().ProtoToDTO(protoResult.GetTag())
 	return (*model.TagsGetOneResponse)(&tag), nil
 }
