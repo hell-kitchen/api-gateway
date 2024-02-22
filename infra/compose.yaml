@@ -4,6 +4,7 @@ services:
     environment:
       - BIND_PORT=8000
       - TAGS_ADDR=tags:5000
+      - INGREDIENTS_ADDR=ingredients:5000
       - USE_TLS=false
     restart: always
     depends_on:
@@ -12,7 +13,7 @@ services:
     image: vladmarlo/tags_backend:latest
     environment:
       - BIND_HOST=0.0.0.0
-      - POSTGRES_HOST=tags_db
+      - POSTGRES_HOST=database
       - POSTGRES_PORT=5432
       - POSTGRES_USER=postgres
       - POSTGRES_DATABASE=tags
@@ -21,7 +22,7 @@ services:
 
     restart: always
     depends_on:
-      tags_db:
+      database:
         condition: service_healthy
       tags_migrate:
         condition: service_completed_successfully
@@ -29,23 +30,51 @@ services:
     image: vladmarlo/tags_migrator:latest
     restart: no
     environment:
-      - POSTGRES_HOST=tags_db
+      - POSTGRES_HOST=database
       - POSTGRES_PORT=5432
       - POSTGRES_USER=postgres
       - POSTGRES_DATABASE=tags
       - POSTGRES_PASSWORD=postgres
     depends_on:
-      tags_db:
+      database:
         condition: service_healthy
-  tags_db:
-    image: postgres
+  ingredients:
+    image: vladmarlo/hell_kitchen_ingredients:latest
+    environment:
+      - BIND_HOST=0.0.0.0
+      - POSTGRES_HOST=database
+      - POSTGRES_PORT=5432
+      - POSTGRES_USER=postgres
+      - POSTGRES_DATABASE=ingredients
+      - POSTGRES_PASSWORD=postgres
+      - BIND_PORT=5000
+    restart: always
+    depends_on:
+      database:
+        condition: service_healthy
+      ingredients_migrate:
+        condition: service_completed_successfully
+  ingredients_migrate:
+    image: vladmarlo/hell_kitchen_ingredients_migrator:latest
+    restart: no
+    environment:
+      - POSTGRES_HOST=database
+      - POSTGRES_PORT=5432
+      - POSTGRES_USER=postgres
+      - POSTGRES_DATABASE=ingredients
+      - POSTGRES_PASSWORD=postgres
+    depends_on:
+      database:
+        condition: service_healthy
+  database:
+    image: vladmarlo/postgres
     restart: always
     user: postgres
     volumes:
-      - tags-db-data:/var/lib/postgresql/data
+      - db-data:/var/lib/postgresql/data
     environment:
-      - POSTGRES_DB=tags
       - POSTGRES_PASSWORD=postgres
+      - POSTGRES_MULTIPLE_DATABASES=ingredients,tags
     healthcheck:
       test: [ "CMD", "pg_isready" ]
       interval: 1s
@@ -63,4 +92,4 @@ services:
     depends_on:
       - api
 volumes:
-  tags-db-data:
+  db-data:
