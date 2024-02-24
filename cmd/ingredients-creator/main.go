@@ -4,6 +4,7 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
+
 	"github.com/hell-kitchen/api-gateway/internal/config"
 	pb "github.com/hell-kitchen/api-gateway/pkg/api/proto/ingredients"
 	"github.com/hell-kitchen/api-gateway/pkg/client/ingredients"
@@ -36,11 +37,13 @@ func main() {
 	}
 	resp, err := cli.CreateMany(ctx, CreateManyToProto(data))
 	if err != nil {
-		panic(err.Error())
+		fmt.Println(err)
 	}
 	fmt.Println(resp)
 }
 
+// CreateManyToProto converts slice of CreateRequest objects
+// to protobuf CreateManyRequest.
 func CreateManyToProto(ingreds []CreateRequest) *pb.CreateManyRequest {
 	var req = make([]*pb.CreateRequest, 0, len(ingreds))
 	for _, i := range ingreds {
@@ -51,6 +54,7 @@ func CreateManyToProto(ingreds []CreateRequest) *pb.CreateManyRequest {
 	}
 }
 
+// dto2pb converts CreateRequest to protobuf CreateRequest.
 func dto2pb(request CreateRequest) *pb.CreateRequest {
 	return &pb.CreateRequest{
 		Name:            request.Name,

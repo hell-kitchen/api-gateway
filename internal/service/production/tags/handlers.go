@@ -2,6 +2,7 @@ package tags
 
 import (
 	"context"
+
 	"github.com/hell-kitchen/api-gateway/internal/convertor"
 	"github.com/hell-kitchen/api-gateway/internal/model"
 	pb "github.com/hell-kitchen/api-gateway/pkg/api/proto/tags"

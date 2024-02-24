@@ -45,6 +45,32 @@ func NewServer(config *config.Server, logger *zap.Logger, srv service.Interface)
 	return s, nil
 }
 
+func (srv *Server) startHTTP(cancel context.CancelCauseFunc) {
+	srv.log.Info("starting HTTPs server")
+	err := srv.router.Start(srv.config.Addr())
+	if err != nil {
+		cancel(err)
+		srv.log.Error("unknown error while starting https server", zap.Error(err))
+	}
+}
+
+func (srv *Server) startHTTPS(cancel context.CancelCauseFunc) {
+	srv.log.Info("starting HTTPs server")
+	err := srv.router.StartTLS(srv.config.Addr(), srv.config.CertFile, srv.config.KeyFile)
+	if err != nil {
+		cancel(err)
+		srv.log.Error("unknown error while starting https server", zap.Error(err))
+	}
+}
+
+func (srv *Server) start(cancel context.CancelCauseFunc) {
+	if srv.config.UseHTTPS {
+		srv.startHTTPS(cancel)
+	} else {
+		srv.startHTTP(cancel)
+	}
+}
+
 // OnStart is function which starts http server.
 //
 // It must be called only once on starting of server life cycle.
@@ -53,14 +79,7 @@ func NewServer(config *config.Server, logger *zap.Logger, srv service.Interface)
 func (srv *Server) OnStart(ctx context.Context) error {
 	srv.log.Info("OnStart hook called")
 	ctx, cancel := context.WithCancelCause(ctx)
-	go func() {
-		srv.log.Info("started server")
-		err := srv.router.Start(srv.config.Addr())
-		if err != nil {
-			cancel(err)
-			srv.log.Error("unknown error while starting http server", zap.Error(err))
-		}
-	}()
+	go srv.start(cancel)
 	time.Sleep(300 * time.Millisecond)
 	return ctx.Err()
 }
