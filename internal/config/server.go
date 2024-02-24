@@ -32,11 +32,15 @@ type Server struct {
 	Timeout time.Duration `config:"server-timeout"`
 	// AllowHosts is used in CORS configurations.
 	AllowHosts []string `config:"allow-hosts"`
+	// CertFile is location of cert file.
+	CertFile string `config:"cert-file"`
+	// KeyFile is location of cert key file
+	KeyFile string `config:"key-file"`
 	// fullAddr is internal attribute to store address on which Server
 	// will be running at.
-	// Creating autimaticly on creation by BindAddr and BindHost.
+	// Creating automatically on creation by BindAddr and BindHost.
 	//
-	// By default is "localhost:8080"
+	// By default, is set to "localhost:8080"
 	fullAddr string
 }
 
