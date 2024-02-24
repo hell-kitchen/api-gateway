@@ -20,7 +20,7 @@ type Tags struct {
 	KeyFile string `config:"tags-key-file"`
 }
 
-// NewIngredients creates new Tags config and Loads data from env/flag to it.
+// NewTags creates new Tags config and Loads data from env/flag to it.
 func NewTags() (*Tags, error) {
 	cfg := &Tags{
 		Addr:     ":5000",
