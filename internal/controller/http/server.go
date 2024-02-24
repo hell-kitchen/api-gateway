@@ -2,6 +2,7 @@ package http
 
 import (
 	"context"
+	sentryecho "github.com/getsentry/sentry-go/echo"
 	"net/http"
 	"time"
 
@@ -125,9 +126,9 @@ func (srv *Server) errorHandler(err error, c echo.Context) {
 
 // configureMiddlewares configures Middlewares.
 //
-// Adds CORS, RequestID, Recover middlewares.
+// Adds CORS, RequestID, Recover middlewares, Sentry support.
 func (srv *Server) configureMiddlewares() {
-	srv.router.Use(
+	var middlewares = []echo.MiddlewareFunc{
 		mw.LogMiddleware(srv.log),
 		middleware.CORSWithConfig(middleware.DefaultCORSConfig),
 		middleware.RequestIDWithConfig(middleware.RequestIDConfig{
@@ -137,7 +138,11 @@ func (srv *Server) configureMiddlewares() {
 		}),
 		middleware.Gzip(),
 		middleware.Recover(),
-	)
+	}
+	if mw.StartUpSentry(srv.config) {
+		middlewares = append(middlewares, sentryecho.New(sentryecho.Options{}))
+	}
+	srv.router.Use(middlewares...)
 }
 
 func (srv *Server) configureRoutes() {

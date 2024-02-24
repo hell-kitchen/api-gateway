@@ -41,7 +41,8 @@ type Server struct {
 	// Creating automatically on creation by BindAddr and BindHost.
 	//
 	// By default, is set to "localhost:8080"
-	fullAddr string
+	fullAddr  string
+	SentryDNS string `config:"sentry-dns"`
 }
 
 // NewServer return new Server config.

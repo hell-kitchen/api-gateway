@@ -3,6 +3,7 @@ module github.com/hell-kitchen/api-gateway
 go 1.20
 
 require (
+	github.com/getsentry/sentry-go v0.27.0
 	github.com/google/uuid v1.6.0
 	github.com/hell-kitchen/pkg/confita v0.0.0-20240209210517-f9cadd513507
 	github.com/hell-kitchen/pkg/logger v0.0.0-20240221165412-55c3ffe0b26d
@@ -24,7 +25,7 @@ require (
 	github.com/josharian/intern v1.0.0 // indirect
 	github.com/mattn/go-colorable v0.1.13 // indirect
 	github.com/mattn/go-isatty v0.0.20 // indirect
-	github.com/pkg/errors v0.8.1 // indirect
+	github.com/pkg/errors v0.9.1 // indirect
 	github.com/pmezard/go-difflib v1.0.0 // indirect
 	github.com/valyala/bytebufferpool v1.0.0 // indirect
 	github.com/valyala/fasttemplate v1.2.2 // indirect
