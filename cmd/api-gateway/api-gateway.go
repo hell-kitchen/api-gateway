@@ -36,28 +36,13 @@ func NewOptions() fx.Option {
 			fake.NewRecipes,
 			fake.NewTokens,
 			fake.NewUsers,
-
-			applyTagsService,
-			applyIngredientService,
+			fake.NewIngredients,
+			fake.NewTags,
 
 			addServerStartup,
 		),
 		fx.NopLogger,
 	)
-}
-
-// applyTagsService applies tag service to base service.
-//
-// Use it only in Invoke of fx if you want use tag service as main tags service.
-func applyTagsService(srv service.Interface, tag *tagsService.Service) {
-	srv.ApplyTags(tag)
-}
-
-// applyIngredientService applies ingredients service to base service.
-//
-// Use it only in Invoke of fx if you want to use ingredients service as main ingredients service.
-func applyIngredientService(srv service.Interface, ingredients *ingredientsService.Service) {
-	srv.ApplyIngredients(ingredients)
 }
 
 // addServerStartup starts http server and adds necessary calls on start and stop.
