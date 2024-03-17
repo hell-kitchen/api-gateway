@@ -1,6 +1,8 @@
 package main
 
 import (
+	"fmt"
+	"github.com/google/uuid"
 	"github.com/hell-kitchen/api-gateway/internal/config"
 	"github.com/hell-kitchen/api-gateway/internal/controller/http"
 	"github.com/hell-kitchen/api-gateway/internal/service"
@@ -9,6 +11,13 @@ import (
 	tagsService "github.com/hell-kitchen/api-gateway/internal/service/production/tags"
 	"github.com/hell-kitchen/pkg/logger"
 	"go.uber.org/fx"
+	"go.uber.org/zap"
+)
+
+var (
+	buildVersion = "N/A"
+	buildDate    = "N/A"
+	buildCommit  = "N/A"
 )
 
 func main() {
@@ -25,20 +34,17 @@ func NewOptions() fx.Option {
 			config.NewTags,
 			config.NewIngredients,
 			http.NewServer,
-			logger.NewProduction,
+			getLogger,
 			tagsService.New,
 			ingredientsService.New,
-			createTagsClient,
-			createIngredientsClient,
 			fx.Annotate(service.New, fx.As(new(service.Interface))),
 		),
 		fx.Invoke(
 			fake.NewRecipes,
 			fake.NewTokens,
 			fake.NewUsers,
-
-			applyTagsService,
-			applyIngredientService,
+			fake.NewIngredients,
+			fake.NewTags,
 
 			addServerStartup,
 		),
@@ -46,18 +52,20 @@ func NewOptions() fx.Option {
 	)
 }
 
-// applyTagsService applies tag service to base service.
-//
-// Use it only in Invoke of fx if you want use tag service as main tags service.
-func applyTagsService(srv service.Interface, tag *tagsService.Service) {
-	srv.ApplyTags(tag)
-}
-
-// applyIngredientService applies ingredients service to base service.
-//
-// Use it only in Invoke of fx if you want to use ingredients service as main ingredients service.
-func applyIngredientService(srv service.Interface, ingredients *ingredientsService.Service) {
-	srv.ApplyIngredients(ingredients)
+func getLogger() (*zap.Logger, error) {
+	log, err := logger.NewProduction(
+		zap.Fields(
+			logger.WithInstanceID(uuid.NewString()),
+			logger.WithService("api-gateway"),
+			zap.String("build-commit", buildCommit),
+			zap.String("build-date", buildDate),
+			zap.String("build-version", buildVersion),
+		),
+	)
+	if err != nil {
+		return nil, fmt.Errorf("got non nil error: %w", err)
+	}
+	return log, nil
 }
 
 // addServerStartup starts http server and adds necessary calls on start and stop.

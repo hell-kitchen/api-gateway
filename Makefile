@@ -1,8 +1,20 @@
 .DEFAULT_GOAL := build
 
+DATE=`date --rfc-3339=seconds`
+COMMIT=`git log -n 1 --pretty=format:"%H"`
+BUILD_VERSION=v1.1.0
+
+.PHONY: log
+log:
+	echo $(DATE) $(COMMIT)
+
 .PHONY: build
 build:
-	go build -o api-gateway.o ./cmd/api-gateway
+	go build -o api-gateway.o -ldflags "-X main.buildVersion=$(BUILD_VERSION) -X 'main.buildDate=$(DATE)' -X main.buildCommit=$(COMMIT)" ./cmd/api-gateway
+
+.PHONY: gox
+gox:
+	gox -ldflags "-X main.buildVersion=$(BUILD_VERSION) -X 'main.buildDate=$(DATE)' -X main.buildCommit=$(COMMIT)" -output ./bin/{{.Dir}}_{{.OS}}_{{.Arch}} ./...
 
 .PHONY: gen/proto
 gen/proto:

@@ -7,6 +7,8 @@ services:
       - INGREDIENTS_ADDR=ingredients:5000
       - USE_TLS=false
     restart: always
+    ports:
+      - "8000:8000"
     depends_on:
       - tags
       - ingredients
@@ -21,7 +23,6 @@ services:
       - POSTGRES_DATABASE=tags
       - POSTGRES_PASSWORD=postgres
       - BIND_PORT=5000
-
     restart: always
     depends_on:
       database:
