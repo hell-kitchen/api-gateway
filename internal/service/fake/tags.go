@@ -17,7 +17,7 @@ type tagsService struct {
 	service service.Interface
 }
 
-func NewTags(srv *Service) {
+func NewTags(srv service.Interface) {
 	srv.ApplyTags(&tagsService{srv})
 }
 
